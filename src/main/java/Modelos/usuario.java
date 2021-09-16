@@ -11,5 +11,5 @@ package Modelos;
  */
 public class usuario {
     
-    System.out.println("Hola grupo");
+    private int m = 0;
 }
