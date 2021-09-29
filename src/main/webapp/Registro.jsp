@@ -1,3 +1,10 @@
+<%-- 
+    Document   : Registro
+    Created on : 28/09/2021, 08:19:36 PM
+    Author     : Gerson Porras
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -11,6 +18,10 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
 
+
+</head>
+<body>
+    
     <div class="container">
         <div class="p-3 mb-2 bg-light text-dark">
             <div class="row">
@@ -20,9 +31,7 @@ and open the template in the editor.
         </div>
     </div>
 
-</head>
-<body>
-
+    <form method="POST" action="UserCtrl"> 
     <div class="container">
         <div class="p-3 mb-2 bg-success text-white">
             <div class="row">
@@ -33,11 +42,9 @@ and open the template in the editor.
                             <h3 class="text-end">Nombre:</h3>
                         </div>
                         <div class="col-8">
-                            <form>
                                 <div class="mb-3">
                                     <input type="text" class="form-control">
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div class="row">
@@ -45,11 +52,11 @@ and open the template in the editor.
                             <h3 class="text-end">Apellido:</h3>
                         </div>
                         <div class="col-8">
-                            <form>
+                            
                                 <div class="mb-3">
                                     <input type="text" class="form-control">
                                 </div>
-                            </form>
+                            
                         </div>
                     </div>  
                     <div class="row">
@@ -57,11 +64,9 @@ and open the template in the editor.
                             <h3 class="text-end">Empresa:</h3>
                         </div>
                         <div class="col-8">
-                            <form>
-                                <div class="mb-3">
+                               <div class="mb-3">
                                     <input type="text" class="form-control">
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div class="row">
@@ -69,11 +74,9 @@ and open the template in the editor.
                             <h3 class="text-end">ID:</h3>
                         </div>
                         <div class="col-8">
-                            <form>
                                 <div class="mb-3">
                                     <input type="text" class="form-control">
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div class="row">
@@ -81,11 +84,9 @@ and open the template in the editor.
                             <h3 class="text-end">Avatar:</h3>
                         </div>
                         <div class="col-8">
-                            <form>
                                 <div class="mb-3">
                                     <input type="text" class="form-control">
                                 </div>
-                            </form>
                         </div>
                     </div>
                     <div class="row">  
@@ -93,12 +94,9 @@ and open the template in the editor.
                             <h3 class="text-end">Correo:</h3>
                         </div>
                         <div class="col-8">
-                            <form>                           
                                 <div class="mb-3">
-
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                                 </div>     
-                            </form>
                         </div>
                     </div>
                 </div>
@@ -113,7 +111,7 @@ and open the template in the editor.
                 </div>           
             </div>
         </div>
-
+ </form>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -22,7 +22,7 @@ public class Connex {
     //metodos
     public void Connect (){
         try{
-            Class.forName("com.mysql.cj.jdbc.driver.").newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
             conn = DriverManager.getConnection("jdbc:mysql://" + this.host + "/"+ this.database +"?zeroDateTimeBehavior=CONVERT_TO_NULL", this.user, this.password);
             System.out.println("Conexion Exitosa");
         }
