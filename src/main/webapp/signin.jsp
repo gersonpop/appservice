@@ -27,12 +27,12 @@
                       <fieldset class="clearfix">
 
                         <p ><span class="fa fa-user"></span><input type="text" name="IdUser_PK" Placeholder="Id usuario" required></p> <!-- JS because of IE support; better: placeholder="Username" -->
-                        <p><span class="fa fa-lock"></span><input type="password" name="Passwprd" Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
+                        <p><span class="fa fa-lock"></span><input type="password" name="Password" Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
 
-                         <div>
-                                            <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="#">Olvido la contraseña?</a></span>
-                                            <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="SignIn"></span>
-                                        </div>
+                        <div>
+                            <span style="width:58%; text-align:left;  display: inline-block;"><a class="small-text" href="recovery.jsp">Olvido la contraseña?</a></span>
+                            <span style="width:40%; text-align:right;  display: inline-block;"><input type="submit" value="Ingresar"></span>
+                        </div>
 
                   </fieldset>
                     <div class="clearfix"></div>

@@ -1,21 +1,20 @@
 @charset "utf-8";
 
 
-@import url//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css);
 
 
 
 div.main{
     background: #61CE70; /* Old browsers */
-background: -moz-radial-gradient(center, ellipse cover,  #61CE70 1%, #008032 100%); /* FF3.6+ */
-background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#61CE70), color-stop(100%,#008032)); /* Chrome,Safari4+ */
-background: -webkit-radial-gradient(center, ellipse cover,  #61CE70 1%,#008032 100%); /* Chrome10+,Safari5.1+ */
-background: -o-radial-gradient(center, ellipse cover,  #61CE70 1%,#008032 100%); /* Opera 12+ */
-background: -ms-radial-gradient(center, ellipse cover,  #61CE70 1%,#008032 100%); /* IE10+ */
-background: radial-gradient(ellipse at center,  #61CE70 1%,#008032 100%); /* W3C */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#61CE70', endColorstr='#008032',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-height:calc(100vh);
-width:100%;
+    background: -moz-radial-gradient(center, ellipse cover,  #61CE70 1%, #008032 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(1%,#61CE70), color-stop(100%,#008032)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #61CE70 1%,#008032 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #61CE70 1%,#008032 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #61CE70 1%,#008032 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #61CE70 1%,#008032 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#61CE70', endColorstr='#008032',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    height:calc(100vh);
+    width:100%;
 }
 
 [class*="fontawesome-"]:before {
