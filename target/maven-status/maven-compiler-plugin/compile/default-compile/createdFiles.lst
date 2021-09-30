@@ -1,0 +1,5 @@
+Controllers\ControlProducto.class
+Controllers\UserCtrl.class
+Models\User.class
+Models\Producto.class
+Models\Connex.class

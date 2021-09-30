@@ -6,6 +6,8 @@
 package Models;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 
 /**
@@ -81,23 +83,34 @@ public class Producto {
             stmt.setInt(4, this.precioProducto);
             stmt.setString(5, this.categoriaProducto);
             stmt.execute();
-            
-            
+            objConnex.Disconnect();
+            System.out.println("estoy consultando datos en la lista");
             
         }catch(Exception e){
          System.out.println("Error Controlador " + e);
-    };
-        
-        
-        
+        }
     }
     
     public void consultarProducto(){
         
     }
     
-    public void listarProducto(){
-        
+    public ResultSet listarProducto(){
+        Connex objConnex =new Connex();
+         objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM producto;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            ResultSet resultQuery = stmt.executeQuery();
+             objConnex.Disconnect();
+             System.out.println("estoy en la consulta sql");
+            return resultQuery;
+            
+        }catch(SQLException e){
+         System.out.println("Error Listar Productos => " + e);
+        }
+        return null;
     }
     
     public void actualizarProducto(){
