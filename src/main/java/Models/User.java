@@ -5,13 +5,18 @@
  */
 package Models;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Gerson Porras
  */
 public class User {
-    private int idUser_PK;
+    private String IdUser_PK;
     private String userName;
+    private String Password;
     private String userLastName;
     private int idCompany_FK;
     private String avatar;
@@ -20,12 +25,12 @@ public class User {
     public User() {
     }
 
-    public int getIdUser_PK() {
-        return idUser_PK;
+    public String getIdUser_PK() {
+        return IdUser_PK;
     }
 
-    public void setIdUser_PK(int idUser_PK) {
-        this.idUser_PK = idUser_PK;
+    public void setIdUser_PK(String idUser_PK) {
+        this.IdUser_PK = idUser_PK;
     }
 
     public String getUserName() {
@@ -70,12 +75,68 @@ public class User {
     
     // ---------------Metodos------------------
     
-    
+    //--------------Diana------------------------
      public void create(){}
      public void list(){}
      public void delete(){}
      public void show(){}
      public void update(){}
+     
+     
+     //--------------Liliana------------------------
+     public boolean recoveryPSW(){
+                 // consultas en BD que el IdUser_PK y email existan SELECT * FROM users WHERE IdUser_PK = ? AND UserEmail = ?;"
+                 
+                 //si existe se debe actualiza el password con el idUser con IdUser**  ="UPDATE producto SET Password =?(IdUser**),WHERE IdUser_PK =?;"   ;
+                 
+                 
+        return false;
+     
+         
+     
+     }
+     
+     
+     //--------------Gerson------------------------
+     public boolean authUser(){
+        Connex objConnex =new Connex();
+         objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM users WHERE IdUser_PK = ? AND Password = ?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.IdUser_PK);
+            stmt.setString(2,this.Password);
+             ResultSet resultQuery = stmt.executeQuery();
+             objConnex.Disconnect();
+             while ( resultQuery.next() ) { 
+                // Read the next item
+                
+                if(resultQuery.getString("IdUser_PK").equals(this.IdUser_PK)){
+                 System.out.println("listo "+ resultQuery.getString("IdUser_PK"));
+                System.out.println(this.IdUser_PK);
+                return true;
+             }
+            }
+             
+            /*if(resultQuery.wasNull()){
+                 return true;
+             }*/
+             return false;
+            
+        }catch(SQLException e){
+         System.out.println("Error consultar  usuario => " + e);
+        }
+       return false;
+     }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
      
      
      

@@ -5,6 +5,7 @@
  */
 package Controllers;
 
+import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author Gerson Porras
  */
 public class UserCtrl extends HttpServlet {
-
+    User objUser = new User(); 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -29,18 +30,85 @@ public class UserCtrl extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserCtrl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserCtrl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String accion = request.getParameter("btnAccion");
+            if(accion.equals("signin")){
+                String IdUser_PK = request.getParameter("IdUser_PK");
+                String Password = request.getParameter("Password");
+                
+                objUser.setIdUser_PK(IdUser_PK);
+                objUser.setPassword(Password);
+                
+                if(objUser.authUser()){
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "window.location.href='main.jsp'; "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }
+                else{
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('usuario o contraseña incorrecto'); "+
+                                 "window.location.href='signin.jsp'; "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }
+            }
+            else if(accion.equals("signup")){
+                /*int IdUser_PK = Integer.parseInt(request.getParameter("IdUser_PK"));
+                String Password = request.getParameter("Password");
+                
+                objUser.setIdUser_PK(IdUser_PK);
+                objUser.setPassword(Password);
+                
+                if(objUser.authUser()){
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('usuario o contraseña incorrecto'); "+
+                                 "window.location.href='main.jsp'; "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }
+                else{
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('usuario o contraseña incorrecto'); "+
+                                 "window.location.href='signin.jsp'; "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }*/
+                
+                
+                
+            }
+            else if(accion.equals("recovery")){
+                /*int IdUser_PK = Integer.parseInt(request.getParameter("IdUser_PK"));
+                String Password = request.getParameter("Password");
+                
+                objUser.setIdUser_PK(IdUser_PK);
+                objUser.setPassword(Password);
+                
+                if(objUser.authUser()){
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('usuario o contraseña incorrecto'); "+
+                                 "window.location.href='main.jsp'; "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }
+                else{
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('usuario o contraseña incorrecto'); "+
+                                 "window.location.href='signin.jsp'; "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }*/
+                
+                
+                
+            }
         }
     }
 
