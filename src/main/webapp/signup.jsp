@@ -22,21 +22,31 @@
     <center>
         <div class="middle">
             <div id="login">
-                <form action="javascript:void(0);" method="get">
+                <form action="UserCtrl" method="POST">
 
                       <fieldset class="clearfix">
 
-                        <p><span class="fa fa-pencil-square-o"></span><input type="text" name="UserName" Placeholder="Name" required></p> 
-                        <p><span class="fa fa-pencil-square-o"></span><input type="text" name="UserLastName" Placeholder="Last Name" required></p> 
-                        <p><span class="fa fa-user"></span><input type="text" name="IdUser_PK" Placeholder="Id User" required></p> 
-                        <p><span class="fa fa-at"></span><input type="email" name="UserEmail" Placeholder="Email" required></p>
-                        <p><span class="fa fa-lock"></span><input type="password" name="Password" Placeholder="Password" required></p>
-                        <p><span class="fa fa-building" style='font-size:24px'></span><input type="select" name="IdCompany_FK" Placeholder="Id Company" required></p>             
-                        <p><span class="fa fa-user"></span><input type="select" name="avatar" Placeholder=" " required></p>
+                        <p><span class="fa fa-pencil-square-o"></span><input type="text" name="UserName" Placeholder="Nombre" required></p> 
+                        <p><span class="fa fa-pencil-square-o"></span><input type="text" name="UserLastName" Placeholder="Apellido" required></p> 
+                        <p><span class="fa fa-user"></span><input type="text" name="IdUser_PK" Placeholder="Doc. Identidad" required></p> 
+                        <p><span class="fa fa-at"></span><input type="text" name="UserEmail" Placeholder="e-mail" required></p> 
+                        <p><span class="fa fa-at"></span><input type="text" name="UserEmail" Placeholder="e-mail" required></p> 
+                        <p><select class="custom-select custom-select-lg mb-3">
+                                                                                            <option selected>seleccione la empresa</option>
+                                                                                            <option value="1">One</option>
+                                                                                            <option value="2">Two</option>
+                                                                                            <option value="3">Three</option>
+                                                                                        </select></p>             
+                        <p><select class="custom-select custom-select-lg mb-3">
+                                                                                            <option selected>seleccione una avatar</option>
+                                                                                            <option value="1">One</option>
+                                                                                            <option value="2">Two</option>
+                                                                                            <option value="3">Three</option>
+                                                                                        </select></p>             
                         
 
                         <div>
-                            <span style="width:40%; text-align:right;  display: inline-block;"><input type="submit" value="Registrar"></span>
+                            <span style="width:40%; text-align:right;  display: inline-block;"><input type="submit" name="btnAccion" value="signup"></span>
                         </div>
 
                   </fieldset>

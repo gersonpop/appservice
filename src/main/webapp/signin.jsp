@@ -22,7 +22,7 @@
     <center>
         <div class="middle">
             <div id="login">
-                <form action="javascript:void(0);" method="get">
+                <form action="UserCtrl" method="POST">
 
                       <fieldset class="clearfix">
 
@@ -30,12 +30,12 @@
                         <p><span class="fa fa-lock"></span><input type="password" name="Password" Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
 
                         <div>
-                            <span style="width:58%; text-align:left;  display: inline-block;"><a class="small-text" href="signup.jsp">Registrarse</a></span>
-                            <span style="width:40%; text-align:right;  display: inline-block;"><input type="submit" value="Ingresar"></span>
+                            <span style="width:98%; text-align:right;  display: inline-block;"><input type="submit" name="btnAccion" value="signin"></span>
                         </div>
                         <br>
                         <div>
                             <span style="width:58%; text-align:left;  display: inline-block;"><a class="small-text" href="recovery.jsp">Olvido la contraseña?</a></span>
+                            <span style="width:40%; text-align:left;  display: inline-block;"><a class="small-text" href="signup.jsp">Registrarse</a></span>
                             </div>
 
                   </fieldset>

@@ -31,7 +31,7 @@
 
                          <div>
                                             <span style="width:48%; text-align:left;  display: inline-block;"><a class="small-text" href="signin.jsp">Iniciar Sesión</a></span>
-                                            <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" value="Recuperar"></span>
+                                            <span style="width:50%; text-align:right;  display: inline-block;"><input type="submit" name="btnAccion" value="recovery"></span>
                                         </div>
 
                   </fieldset>
