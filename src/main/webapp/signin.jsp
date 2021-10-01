@@ -30,9 +30,13 @@
                         <p><span class="fa fa-lock"></span><input type="password" name="Password" Placeholder="Password" required></p> <!-- JS because of IE support; better: placeholder="Password" -->
 
                         <div>
-                            <span style="width:58%; text-align:left;  display: inline-block;"><a class="small-text" href="recovery.jsp">Olvido la contraseña?</a></span>
+                            <span style="width:58%; text-align:left;  display: inline-block;"><a class="small-text" href="signup.jsp">Registrarse</a></span>
                             <span style="width:40%; text-align:right;  display: inline-block;"><input type="submit" value="Ingresar"></span>
                         </div>
+                        <br>
+                        <div>
+                            <span style="width:58%; text-align:left;  display: inline-block;"><a class="small-text" href="recovery.jsp">Olvido la contraseña?</a></span>
+                            </div>
 
                   </fieldset>
                     <div class="clearfix"></div>

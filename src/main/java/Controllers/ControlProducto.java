@@ -61,6 +61,26 @@ Producto objProducto = new Producto();
                                  "</script></body></html>";
                         
                         out.println(mensaje);
+            }else if(accion.equals("Actualizar")){
+                int codigoProducto = Integer.parseInt(request.getParameter("codigoProducto"));
+                String nombreProducto = request.getParameter("nombreProducto");
+                int cantidadProducto = Integer.parseInt(request.getParameter("cantidadProducto"));
+                int precioProducto = Integer.parseInt(request.getParameter("precioProducto"));
+                String categoriaProducto = request.getParameter("categoriaProducto");
+                
+                objProducto.setCodigoProducto(codigoProducto);
+                objProducto.setNombreProducto(nombreProducto);
+                objProducto.setCantidadProducto(cantidadProducto);
+                objProducto.setPrecioProducto(precioProducto);
+                objProducto.setCategoriaProducto(categoriaProducto);
+                objProducto.actualizarProducto();
+                
+                String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('Producto Actualizado correctamente'); "+
+                                 "window.location.href='index.jsp'; "+
+                                 "</script></body></html>";
+                        out.println(mensaje);
             }
         }catch(Exception e){
             System.out.println("Error Controlador " + e);
@@ -90,6 +110,33 @@ Producto objProducto = new Producto();
  
         return null;
     }
+   
+   public ArrayList consultar( int codigoProducto){
+        try {
+            objProducto.setCodigoProducto(codigoProducto);
+            ResultSet consulta = objProducto.consultarProducto(); 
+            ArrayList<Producto> listaProducto = new ArrayList<>(); 
+            
+            while(consulta.next()){
+                objProducto = new Producto(); 
+                objProducto.setCodigoProducto(consulta.getInt(1));
+                objProducto.setNombreProducto(consulta.getString(2));
+                objProducto.setCantidadProducto(consulta.getInt(3));
+                objProducto.setPrecioProducto(consulta.getInt(4));
+                objProducto.setCategoriaProducto(consulta.getString(5));
+                listaProducto.add(objProducto); 
+                
+            }
+            
+            return listaProducto; 
+            
+        } catch (Exception error) {
+            System.out.println("Error Controlador: " + error);
+        }
+ 
+        return null;
+    }
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

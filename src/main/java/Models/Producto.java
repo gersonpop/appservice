@@ -91,8 +91,24 @@ public class Producto {
         }
     }
     
-    public void consultarProducto(){
-        
+    public ResultSet consultarProducto(){
+         Connex objConnex =new Connex();
+         objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM producto WHERE codigoProducto = ?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setInt(1,this.codigoProducto);
+             ResultSet resultQuery = stmt.executeQuery();
+             objConnex.Disconnect();
+             System.out.println("estoy consultando producto sql");
+             
+            return resultQuery;
+            
+        }catch(SQLException e){
+         System.out.println("Error consultar  Producto => " + e);
+        }
+        return null;
     }
     
     public ResultSet listarProducto(){
@@ -104,7 +120,7 @@ public class Producto {
             stmt = objConnex.conn.prepareStatement(sql);
             ResultSet resultQuery = stmt.executeQuery();
              objConnex.Disconnect();
-             System.out.println("estoy en la consulta sql");
+             
             return resultQuery;
             
         }catch(SQLException e){
@@ -114,7 +130,30 @@ public class Producto {
     }
     
     public void actualizarProducto(){
+        Connex objConnex = new Connex();
+        objConnex.Connect();
         
+        try{
+            String sql ="UPDATE producto SET " + 
+                    "nombreProducto =?, " +
+                    "cantidadProducto =?, " +
+                    "precioProducto =?, " +
+                    "categoria =? " +
+                    "WHERE codigoProducto =?;"   ;
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setInt(5,this.codigoProducto);
+            stmt.setString(1,this.nombreProducto);
+            stmt.setInt(2,this.cantidadProducto);
+            stmt.setInt(3, this.precioProducto);
+            stmt.setString(4, this.categoriaProducto);
+            stmt.execute();
+            objConnex.Disconnect();
+            System.out.println("estoy consultando datos en la lista");
+            
+        }catch(Exception e){
+         System.out.println("Error Controlador " + e);
+        }
     }
     
     public void eliminarProducto(){

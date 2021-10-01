@@ -19,8 +19,10 @@
  
     </head>
     <body>
+    <center>
         <a href="signin.jsp"><button class="btn btn-outline-success">Login</button></a>
-                        
+         <a href="main.jsp"><button class="btn btn-outline-success">Main</button></a>
+              </center>          
         <header>
             <div class="container bg-success text-center bg-opacity-25 margen" >
                 <h1>CRUD WEB Misión TIC 2021 JSP + JAVA + BOOTSTRAP</h1>
