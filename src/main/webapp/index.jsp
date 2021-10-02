@@ -85,10 +85,6 @@
                 <tbody>
                     <% 
                        try{
-                           
-                       
-                        
-                        
                         ArrayList<Producto> listaProducto = new ArrayList<>(); 
                         ControlProducto ctrProducto = new ControlProducto(); 
                         listaProducto = ctrProducto.listar(); 

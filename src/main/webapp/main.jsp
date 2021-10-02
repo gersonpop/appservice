@@ -9,9 +9,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 <link href="/assets/CSS/calendar.css" rel="stylesheet" id="">
 
@@ -22,7 +21,7 @@
 
 	body {
 	    margin-bottom: 40px;
-		margin-top: 40px;
+		margin-top: 0px;
 		text-align: center;
 		font-size: 14px;
 		font-family: 'Roboto', sans-serif;
@@ -82,176 +81,209 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 </style>
 </head>
 <body>
-<div id='wrap'>
 
-<div id='calendar'></div>
+<section>
+    <nav class="navbar navbar-expand-lg  bg-success  bg-gradient shadow-lg ">
+        <a class="navbar-brand  text-white" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item active">
+              <a class="nav-link text-white" href="#">Inicio <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item ">
+              <a class="nav-link text-white " href="#">Requisicion</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="#">Cotizacoin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white disabled" href="/signin.jsp">Salir</a>
+            </li>
+    </ul>
 
-<div style='clear:both'></div>
-</div>
+</section>
 
 
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-<script src="/assets/js/calendar.js"></script>
-<script>
+    <br
 
-	$(document).ready(function() {
-	    var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
-		
-		/*  className colors
-		
-		className: default(transparent), important(red), chill(pink), success(green), info(blue)
-		
-		*/		
-		
-		  
-		/* initialize the external events
-		-----------------------------------------------------------------*/
-	
-		$('#external-events div.external-event').each(function() {
-		
-			// create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-			// it doesn't need to have a start or end
-			var eventObject = {
-				title: $.trim($(this).text()) // use the element's text as the event title
-			};
-			
-			// store the Event Object in the DOM element so we can get to it later
-			$(this).data('eventObject', eventObject);
-			
-			// make the event draggable using jQuery UI
-			$(this).draggable({
-				zIndex: 999,
-				revert: true,      // will cause the event to go back to its
-				revertDuration: 0  //  original position after the drag
-			});
-			
-		});
-	
-	
-		/* initialize the calendar
-		-----------------------------------------------------------------*/
-		
-		var calendar =  $('#calendar').fullCalendar({
-			header: {
-				left: 'title',
-				center: 'agendaDay,agendaWeek,month',
-				right: 'prev,next today'
-			},
-			editable: true,
-			firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-			selectable: true,
-			defaultView: 'month',
-			
-			axisFormat: 'h:mm',
-			columnFormat: {
-                month: 'ddd',    // Mon
-                week: 'ddd d', // Mon 7
-                day: 'dddd M/d',  // Monday 9/7
-                agendaDay: 'dddd d'
-            },
-            titleFormat: {
-                month: 'MMMM yyyy', // September 2009
-                week: "MMMM yyyy", // September 2009
-                day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
-            },
-			allDaySlot: false,
-			selectHelper: true,
-			select: function(start, end, allDay) {
-				var title = prompt('Event Title:');
-				if (title) {
-					calendar.fullCalendar('renderEvent',
-						{
-							title: title,
-							start: start,
-							end: end,
-							allDay: allDay
-						},
-						true // make the event "stick"
-					);
-				}
-				calendar.fullCalendar('unselect');
-			},
-			droppable: true, // this allows things to be dropped onto the calendar !!!
-			drop: function(date, allDay) { // this function is called when something is dropped
-			
-				// retrieve the dropped element's stored Event Object
-				var originalEventObject = $(this).data('eventObject');
-				
-				// we need to copy it, so that multiple events don't have a reference to the same object
-				var copiedEventObject = $.extend({}, originalEventObject);
-				
-				// assign it the date that was reported
-				copiedEventObject.start = date;
-				copiedEventObject.allDay = allDay;
-				
-				// render the event on the calendar
-				// the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-				$('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
-				
-				// is the "remove after drop" checkbox checked?
-				if ($('#drop-remove').is(':checked')) {
-					// if so, remove the element from the "Draggable Events" list
-					$(this).remove();
-				}
-				
-			},
-			
-			events: [
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false,
-					className: 'info'
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false,
-					className: 'important'
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false,
-				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-					className: 'success'
-				}
-			],			
-		});
-		
-		
-	});
 
-</script>
- 
-</body>
+    <section>
+
+        <div id='wrap'>
+
+            <div id='calendar'></div>
+
+                <div style='clear:both'></div>
+            </div>
+    </section>
+
+   
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="/assets/js/calendar.js"></script>
+        <script>
+
+                $(document).ready(function() {
+                    var date = new Date();
+                        var d = date.getDate();
+                        var m = date.getMonth();
+                        var y = date.getFullYear();
+
+                       //className colors
+
+                        //className: default(transparent), important(red), chill(pink), success(green), info(blue)
+
+                        		
+
+
+                        /* initialize the external events
+                        -----------------------------------------------------------------*/
+
+                        $('#external-events div.external-event').each(function() {
+
+                                // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
+                                // it doesn't need to have a start or end
+                                var eventObject = {
+                                        title: $.trim($(this).text()) // use the element's text as the event title
+                                };
+
+                                // store the Event Object in the DOM element so we can get to it later
+                                $(this).data('eventObject', eventObject);
+
+                                // make the event draggable using jQuery UI
+                                $(this).draggable({
+                                        zIndex: 999,
+                                        revert: true,      // will cause the event to go back to its
+                                        revertDuration: 0  //  original position after the drag
+                                });
+
+                        });
+
+
+                        /* initialize the calendar
+                        -----------------------------------------------------------------*/
+
+                        var calendar =  $('#calendar').fullCalendar({
+                                header: {
+                                        left: 'title',
+                                        center: 'agendaDay,agendaWeek,month',
+                                        right: 'prev,next today'
+                                },
+                                editable: true,
+                                firstDay: 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+                                selectable: true,
+                                defaultView: 'month',
+
+                                axisFormat: 'h:mm',
+                                columnFormat: {
+                        month: 'ddd',    // Mon
+                        week: 'ddd d', // Mon 7
+                        day: 'dddd M/d',  // Monday 9/7
+                        agendaDay: 'dddd d'
+                    },
+                    titleFormat: {
+                        month: 'MMMM yyyy', // September 2009
+                        week: "MMMM yyyy", // September 2009
+                        day: 'MMMM yyyy'                  // Tuesday, Sep 8, 2009
+                    },
+                                allDaySlot: false,
+                                selectHelper: true,
+                                select: function(start, end, allDay) {
+                                        var title = prompt('Event Title:');
+                                        if (title) {
+                                                calendar.fullCalendar('renderEvent',
+                                                        {
+                                                                title: title,
+                                                                start: start,
+                                                                end: end,
+                                                                allDay: allDay
+                                                        },
+                                                        true // make the event "stick"
+                                                );
+                                        }
+                                        calendar.fullCalendar('unselect');
+                                },
+                                droppable: true, // this allows things to be dropped onto the calendar !!!
+                                drop: function(date, allDay) { // this function is called when something is dropped
+
+                                        // retrieve the dropped element's stored Event Object
+                                        var originalEventObject = $(this).data('eventObject');
+
+                                        // we need to copy it, so that multiple events don't have a reference to the same object
+                                        var copiedEventObject = $.extend({}, originalEventObject);
+
+                                        // assign it the date that was reported
+                                        copiedEventObject.start = date;
+                                        copiedEventObject.allDay = allDay;
+
+                                        // render the event on the calendar
+                                        // the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
+                                        $('#calendar').fullCalendar('renderEvent', copiedEventObject, true);
+
+                                        // is the "remove after drop" checkbox checked?
+                                        if ($('#drop-remove').is(':checked')) {
+                                                // if so, remove the element from the "Draggable Events" list
+                                                $(this).remove();
+                                        }
+
+                                },
+
+                                events: [
+                                        {
+                                                title: 'All Day Event',
+                                                start: new Date(y, m, 1)
+                                        },
+                                        {
+                                                id: 999,
+                                                title: 'Repeating Event',
+                                                start: new Date(y, m, d-3, 16, 0),
+                                                allDay: false,
+                                                className: 'info'
+                                        },
+                                        {
+                                                id: 999,
+                                                title: 'Repeating Event',
+                                                start: new Date(y, m, d+4, 16, 0),
+                                                allDay: false,
+                                                className: 'info'
+                                        },
+                                        {
+                                                title: 'Meeting',
+                                                start: new Date(y, m, d, 10, 30),
+                                                allDay: false,
+                                                className: 'important'
+                                        },
+                                        {
+                                                title: 'Lunch',
+                                                start: new Date(y, m, d, 12, 0),
+                                                end: new Date(y, m, d, 14, 0),
+                                                allDay: false,
+                                                className: 'important'
+                                        },
+                                        {
+                                                title: 'Birthday Party',
+                                                start: new Date(y, m, d+1, 19, 0),
+                                                end: new Date(y, m, d+1, 22, 30),
+                                                allDay: false,
+                                        },
+                                        {
+                                                title: 'Click for Google',
+                                                start: new Date(y, m, 28),
+                                                end: new Date(y, m, 29),
+                                                url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
+                                                className: 'success'
+                                        }
+                                ],			
+                        });
+
+
+                });
+
+        </script>
+
+    </body>
 </html>
