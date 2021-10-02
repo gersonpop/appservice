@@ -39,6 +39,7 @@ public class UserCtrl extends HttpServlet {
                 objUser.setIdUser_PK(IdUser_PK);
                 objUser.setPassword(Password);
                 
+                
                 if(objUser.authUser()){
                     String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
@@ -106,7 +107,31 @@ public class UserCtrl extends HttpServlet {
                     out.println(mensaje);
                 }*/
                 
+                /*if(accion.equals("signup")){
+            
+                String UserEmail = request.getParameter("UserEmail");
+                String userName= request.getParameter("userName");
+                String userLastName= request.getParameter("userLastName");
+                int idCompany_FK = Integer.parseInt(request.getParameter("idCompany_FK"));
+                String avatar=request.getParameter("avatar");
+              
+                objUser.setUserEmail(UserEmail);
+                objUser.setUserName(userName);
+                objUser.setUserLastName(userLastName);
+                objUser.setIdCompany_FK(idCompany_FK);
+                objUser.setAvatar(avatar);
                 
+                
+                objUser.create();
+                
+                String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('Usuario insertado correctamente'); "+
+                                 "window.location.href='index.jsp'; "+
+                                 "</script></body></html>";
+                        
+                        out.println(mensaje); */   
+
                 
             }
         }

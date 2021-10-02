@@ -76,7 +76,29 @@ public class User {
     // ---------------Metodos------------------
     
     //--------------Diana------------------------
-     public void create(){}
+     public void create(){
+     Connex objConnex = new Connex();
+     objConnex.Connect();
+        
+        try{
+            String sql ="INSERT INTO users(UserEmail,UserName,UserLastName,IdCompany_FK,avatar) VALUES (?,?,?,?,?);";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1, this.UserEmail);
+            stmt.setString(2,this.userName);
+            stmt.setString(3,this.userLastName);
+            stmt.setInt(4,this.idCompany_FK);
+            stmt.setString(5, this.avatar);
+            stmt.execute();
+            objConnex.Disconnect();
+            System.out.println("estoy ingresando un usuario");
+            
+        }catch(Exception e){
+         System.out.println("Error Controlador " + e);
+        }
+    
+     
+     }
      public void list(){}
      public void delete(){}
      public void show(){}
