@@ -82,17 +82,17 @@ public class UserCtrl extends HttpServlet {
                         String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
                                  "alert('Usuario Agregado correctamente'); "+
-                                 "window.location.href='index.jsp'; "+
+                                 "window.location.href='main.jsp'; "+
                                  "</script></body></html>";
-                        
+                                 out.println(mensaje);
                 }else{resultado.replace("'","");
                      String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
                                  "alert(\"Error  al crear el usuario: ";
-                            mensaje= mensaje + resultado; 
-                            mensaje= mensaje + "\");  window.history.back();</script></body></html>";
-                            System.out.println(mensaje);
-                        out.println(mensaje);
+                                mensaje= mensaje + resultado; 
+                                mensaje= mensaje + "\");  window.history.back();</script></body></html>";
+                                System.out.println(mensaje);
+                                out.println(mensaje);
                 }
                     
                 
