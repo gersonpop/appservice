@@ -57,30 +57,44 @@ public class UserCtrl extends HttpServlet {
                 }
             }
             else if(accion.equals("signup")){
-                /*int IdUser_PK = Integer.parseInt(request.getParameter("IdUser_PK"));
-                String Password = request.getParameter("Password");
+               String IdUser_PK = request.getParameter("IdUser_PK");
+               String UserEmail = request.getParameter("UserEmail");
+                String userName= request.getParameter("UserName");
+                String userLastName= request.getParameter("UserLastName");
+                String idCompany_FK = request.getParameter("IdCompany_FK");
+                String avatar=request.getParameter("avatar");
+                String password = IdUser_PK +"**";
                 
                 objUser.setIdUser_PK(IdUser_PK);
-                objUser.setPassword(Password);
+                objUser.setUserEmail(UserEmail);
+                objUser.setUserName(userName);
+                objUser.setUserLastName(userLastName);
+                objUser.setIdCompany_FK(idCompany_FK);
+                objUser.setAvatar(avatar);
+                objUser.setPassword(password );
                 
-                if(objUser.authUser()){
-                    String mensaje = "<html><body>"+
+                
+                String resultado=  objUser.create();
+               
+                
+                if(resultado.equals("")){
+                        
+                        String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
-                                 "alert('usuario o contraseña incorrecto'); "+
-                                 "window.location.href='main.jsp'; "+
+                                 "alert('Usuario Agregado correctamente'); "+
+                                 "window.location.href='index.jsp'; "+
                                  "</script></body></html>";
-                    out.println(mensaje);
+                        
+                }else{resultado.replace("'","");
+                     String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert(\"Error  al crear el usuario: ";
+                            mensaje= mensaje + resultado; 
+                            mensaje= mensaje + "\");  window.history.back();</script></body></html>";
+                            System.out.println(mensaje);
+                        out.println(mensaje);
                 }
-                else{
-                    String mensaje = "<html><body>"+
-                                 " <script type='text/javaScript'> "+
-                                 "alert('usuario o contraseña incorrecto'); "+
-                                 "window.location.href='signin.jsp'; "+
-                                 "</script></body></html>";
-                    out.println(mensaje);
-                }*/
-                
-                
+                    
                 
             }
             else if(accion.equals("recovery")){

@@ -18,7 +18,7 @@ public class User {
     private String userName;
     private String Password;
     private String userLastName;
-    private int idCompany_FK;
+    private String idCompany_FK;
     private String avatar;
     private String UserEmail;
 
@@ -49,11 +49,11 @@ public class User {
         this.userLastName = userLastName;
     }
 
-    public int getIdCompany_FK() {
+    public String getIdCompany_FK() {
         return idCompany_FK;
     }
 
-    public void setIdCompany_FK(int idCompany_FK) {
+    public void setIdCompany_FK(String idCompany_FK) {
         this.idCompany_FK = idCompany_FK;
     }
 
@@ -72,29 +72,39 @@ public class User {
     public void setUserEmail(String UserEmail) {
         this.UserEmail = UserEmail;
     }
-    
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
     // ---------------Metodos------------------
     
     //--------------Diana------------------------
-     public void create(){
+     public String create(){
      Connex objConnex = new Connex();
      objConnex.Connect();
         
         try{
-            String sql ="INSERT INTO users(UserEmail,UserName,UserLastName,IdCompany_FK,avatar) VALUES (?,?,?,?,?);";
+            System.out.println("voya ingresar un usuairo");
+            String sql ="INSERT INTO users(IdUser_PK, UserEmail,UserName,UserLastName,IdCompany_FK,avatar, Password) VALUES (?, ?,?,?,?,?, ?);";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
-            stmt.setString(1, this.UserEmail);
-            stmt.setString(2,this.userName);
-            stmt.setString(3,this.userLastName);
-            stmt.setInt(4,this.idCompany_FK);
-            stmt.setString(5, this.avatar);
+            stmt.setString(1, this.IdUser_PK);
+            stmt.setString(2, this.UserEmail);
+            stmt.setString(3,this.userName);
+            stmt.setString(4,this.userLastName);
+            stmt.setString(5,this.idCompany_FK);
+            stmt.setString(6, this.avatar);
+            stmt.setString(7, this.Password);
             stmt.execute();
             objConnex.Disconnect();
-            System.out.println("estoy ingresando un usuario");
+            return  "";
             
         }catch(Exception e){
-         System.out.println("Error Controlador " + e);
+         System.out.println("Error al crar al usuario " + e);
+         return e.toString();
         }
     
      
@@ -152,13 +162,7 @@ public class User {
        return false;
      }
 
-    public String getPassword() {
-        return Password;
-    }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
-    }
      
      
      
