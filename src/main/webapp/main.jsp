@@ -242,27 +242,27 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                                                 title: 'Repeating Event',
                                                 start: new Date(y, m, d-3, 16, 0),
                                                 allDay: false,
-                                                className: 'info'
+                                                className: 'chill'
                                         },
                                         {
                                                 id: 999,
                                                 title: 'Repeating Event',
                                                 start: new Date(y, m, d+4, 16, 0),
                                                 allDay: false,
-                                                className: 'info'
+                                                className: 'chill'
                                         },
                                         {
                                                 title: 'Meeting',
                                                 start: new Date(y, m, d, 10, 30),
                                                 allDay: false,
-                                                className: 'important'
+                                                className: 'chill'
                                         },
                                         {
                                                 title: 'Lunch',
                                                 start: new Date(y, m, d, 12, 0),
                                                 end: new Date(y, m, d, 14, 0),
                                                 allDay: false,
-                                                className: 'important'
+                                                className: 'chill'
                                         },
                                         {
                                                 title: 'Birthday Party',
@@ -275,7 +275,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                                                 start: new Date(y, m, 28),
                                                 end: new Date(y, m, 29),
                                                 url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
-                                                className: 'success'
+                                                className: 'chill'
                                         }
                                 ],			
                         });
