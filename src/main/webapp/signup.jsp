@@ -30,23 +30,23 @@
                         <span class="fa fa-pencil-square-o"></span><input type="text" name="UserLastName" Placeholder="Apellido" required></p> 
                         <p style="display: flex"><span class="fa fa-user"></span><input  style="margin-right: 5px" type="text" name="IdUser_PK" Placeholder="Doc. Identidad" required>
                         <span class="fa fa-at"></span><input type="text" name="UserEmail" Placeholder="e-mail" required></p> 
-                        <p style="display: flex"><select class="form-select" multiple aria-label="multiple select example" name="IdCompany_FK">
-                                                                                            <option selected>seleccione la empresa</option>
+                        <p style="display: flex"><select class="form-select" name="IdCompany_FK">
+                                                                                            <option selected="">Seleccione la empresa</option>
                                                                                             <option value="812512275">RMS SAS - Reliability Maintenance Services</option>
                                                                                             <option value="899999068">ECopetrol SA</option>
                                                                                          
-                                                                                        </select>           
-                        <select class="custom-select custom-select-lg mb-3" data-show-content="true" name="avatar">
-                                                                                            <option selected>seleccione una icono</option>
-                                                                                            <option data-content="<i class='fa fa-cutlery' ></i>"  value="1">1</option>
+                                                                                            </select>           
+                        <select class="custom-select custom-select-lg mb-3" name="avatar">
+                                                                                            <option selected>seleccione un icono</option>
+                                                                                                <option data-content="<i class='fa fa-cutlery' ></i>"  value="1">1</option>
                                                                                                 <option data-content="<i class='fa fa-eye'></i>" value="2">2</option>
                                                                                                 <option data-content="<i class='fa fa-heart-o'></i>" value="34">3</option>
                                                                                                 <option data-content="<i class='fa fa-leaf'></i>" value="4">4</option>
                                                                                                 <option data-content="<i class='fa fa-music'></i>" value="5">6</option>
                                                                                                 <option data-content="<i class='fa fa-star'></i>" value="5">7</option>
-                                                                                        </select></p>             
+                                                                                            </select></p>             
                                                                                         
-                                                                                            
+                                                                                                                                                            
                
            
                         <div>
