@@ -5,6 +5,10 @@
  */
 package Models;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author carolina
@@ -74,8 +78,28 @@ public class Company {
         this.Status = Status;
     }
 
-    public Company() {
-        
+    public ResultSet listCompany(){
+        Connex objConnex =new Connex();
+         objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM empresa;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.idEmpresa_PK);
+            /*stmt.setString(2,this.Razon_Social);
+            stmt.setString(3,this.Representante_Legal);
+            stmt.setString(4,this.Actividad_Economica);
+            stmt.setString(5,this.Persona_Contacto);
+            stmt.setString(6,this.Telefono_Contacto);*/
+            ResultSet resultQuery = stmt.executeQuery();
+            objConnex.Disconnect();
+             
+            return resultQuery;
+            
+        }catch(SQLException e){
+         System.out.println("Error Listar Empresas => " + e);
+        }
+        return null;
     }
       
 }
