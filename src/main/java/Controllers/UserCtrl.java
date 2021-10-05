@@ -57,8 +57,8 @@ public class UserCtrl extends HttpServlet {
                 }
             }
             else if(accion.equals("signup")){
-               String IdUser_PK = request.getParameter("IdUser_PK");
-               String UserEmail = request.getParameter("UserEmail");
+                String IdUser_PK = request.getParameter("IdUser_PK");
+                String UserEmail = request.getParameter("UserEmail");
                 String userName= request.getParameter("UserName");
                 String userLastName= request.getParameter("UserLastName");
                 String idCompany_FK = request.getParameter("IdCompany_FK");

@@ -100,7 +100,7 @@ public class User {
             stmt.setString(7, this.Password);
             stmt.execute();
             objConnex.Disconnect();
-            return  "";
+            return "";
             
         }catch(Exception e){
          System.out.println("Error al crar al usuario " + e);
