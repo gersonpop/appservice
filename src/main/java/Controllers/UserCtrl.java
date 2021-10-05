@@ -90,11 +90,12 @@ public class UserCtrl extends HttpServlet {
                                  " <script type='text/javaScript'> "+
                                  "alert(\"Error  al crear el usuario: ";
                                 mensaje= mensaje + resultado; 
-                                mensaje= mensaje + "\");  window.history.back();</script></body></html>";
+                                mensaje= mensaje + "\"); window.location.href='signin.jsp'; "+ "</script></body></html>";
                                 System.out.println(mensaje);
                                 out.println(mensaje);
-                }
-                    
+                                
+                                } 
+            
                 
             }
             else if(accion.equals("recovery")){
