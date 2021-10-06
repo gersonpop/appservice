@@ -5,19 +5,24 @@
  */
 package Controllers;
 
+import Models.Calendar;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author carolina
+ * @author Gerson Porras
  */
-public class CompanyCtrl extends HttpServlet {
-
+@WebServlet(name = "CalendarCtrl", urlPatterns = {"/CalendarCtrl"})
+public class CalendarCtrl extends HttpServlet {
+Calendar objCalendar = new Calendar();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,22 +36,50 @@ public class CompanyCtrl extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            String accion = request.getParameter("btnAccion");
-            
-            
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ControlEmpresa</title>");            
+            out.println("<title>Servlet CalendarCtrl</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ControlEmpresa at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CalendarCtrl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
+    public ArrayList listar(){
+        try {
+            ResultSet consulta = objCalendar.getAll(); 
+            ArrayList<Calendar> listCalendar = new ArrayList<>(); 
+            
+            while(consulta.next()){
+                objCalendar = new Calendar(); 
+                objCalendar.setIdCalendar(consulta.getInt(1));
+                objCalendar.setTitle(consulta.getString(2));
+                objCalendar.setStart(consulta.getDate(3));
+                objCalendar.setEnd(consulta.getDate(4));
+                objCalendar.setIdUser_FK(consulta.getString(5));
+                objCalendar.setTipo_Documento(consulta.getString(6));
+                objCalendar.setId_documento(consulta.getInt(7));
+                objCalendar.setEstado(consulta.getString(8));
+                objCalendar.setClassName(consulta.getString(9));
+               objCalendar.setUrl(consulta.getString(10));
+               
+               
+                listCalendar.add(objCalendar); 
+                
+            }
+            
+            return listCalendar; 
+            
+        } catch (Exception error) {
+            System.out.println("Error Controlador: " + error);
+        }
+ 
+        return null;
+    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
