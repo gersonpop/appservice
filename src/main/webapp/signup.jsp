@@ -4,6 +4,9 @@
     Author     : carolina
 --%>
 
+<%@page import="Controllers.CompanyCtrl"%>
+<%@page import="Models.Company"%>
+<%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -32,10 +35,16 @@
                         <span class="fa fa-at"></span><input type="text" name="UserEmail" Placeholder="e-mail" required></p> 
                         <p style="display: flex"><select class="form-select" name="IdCompany_FK">
                                                                                             <option selected="">Seleccione la empresa</option>
-                                                                                            <option value="812512275">RMS SAS - Reliability Maintenance Services</option>
-                                                                                            <option value="899999068">ECopetrol SA</option>
-                                                                                         
-                                                                                            </select>           
+                                                <% 
+                                                ArrayList<Company> listCompany = new ArrayList<>(); 
+                                                CompanyCtrl ctrCompany = new CompanyCtrl(); 
+                                                listCompany = ctrCompany.list(); 
+                        
+                                                for(int i=0; i<listCompany.size();i++){
+                                                %>
+                                                <option value="<%=listCompany.get(i).getIdEmpresa_PK()%>"><%=listCompany.get(i).getRazon_Social()%></option>
+                                                <%}%>                                                          
+                                                </select>           
                         <select class="custom-select custom-select-lg mb-3" name="avatar">
                                                                                             <option selected>seleccione un icono</option>
                                                                                                 <option data-content="<i class='fa fa-cutlery' ></i>"  value="1">1</option>
