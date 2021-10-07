@@ -105,7 +105,7 @@ public class Company {
                     "IdEmpresa_PK =?, " +
                     "Razon_Social =?, " +
                     "Representante_Legal =?, " +
-                    "getActividad_Economica =? " +
+                    "Actividad_Economica =? " +
                     "Persona Contacto =?, " +
                     "Telefono Contacto =?, " +
                     "Status =?, " +
