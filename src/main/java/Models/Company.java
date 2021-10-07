@@ -96,6 +96,35 @@ public class Company {
         }
         return null;
     }
-      
+    public void updateCompany(){
+    Connex objConnex = new Connex();
+        objConnex.Connect();
+        
+        try{
+            String sql ="UPDATE Company SET " + 
+                    "IdEmpresa_PK =?, " +
+                    "Razon_Social =?, " +
+                    "Representante_Legal =?, " +
+                    "getActividad_Economica =? " +
+                    "Persona Contacto =?, " +
+                    "Telefono Contacto =?, " +
+                    "Status =?, " +
+                    "WHERE IdEmpresa_PK  =?;"   ;
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.idEmpresa_PK);
+            stmt.setString(2,this.Razon_Social);
+            stmt.setString(3,this.Representante_Legal);
+            stmt.setString(4,this.Actividad_Economica);
+            stmt.setString(5,this.Persona_Contacto);
+            stmt.setString(6,this.Telefono_Contacto);
+            stmt.setString(7,this.Status);
+            objConnex.Disconnect();
+            System.out.println("Actualizando datos empresa");
+           
+            
+        }catch(Exception e){
+         System.out.println("Error Controlador " + e);
+        }
+    }
 }
-
