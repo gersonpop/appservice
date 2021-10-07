@@ -5,11 +5,9 @@
  */
 package Controllers;
 
-import Models.Calendar;
+import Models.Request;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,9 +18,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gerson Porras
  */
-@WebServlet(name = "CalendarCtrl", urlPatterns = {"/CalendarCtrl"})
-public class CalendarCtrl extends HttpServlet {
-Calendar objCalendar = new Calendar();
+@WebServlet(name = "RequestCtrl", urlPatterns = {"/RequestCtrl"})
+public class RequestCtrl extends HttpServlet {
+    Request objRQ = new Request();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,46 +34,40 @@ Calendar objCalendar = new Calendar();
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet CalendarCtrl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet CalendarCtrl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String accion = request.getParameter("btnAccion");
+            if(accion.equals("CreateRQ")){
+
+                String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('Vamos a crear una RQ'); "+
+                                 "window.location.href='index.jsp'; "+
+                                 "</script></body></html>";
+                        
+                        out.println(mensaje);
+            }
+        }catch(Exception e){
+            System.out.println("Error Controlador " + e);
         }
+        
     }
 
-    public ArrayList getAll(){
-        try {
-            ResultSet consulta = objCalendar.getAll(); 
-            ArrayList<Calendar> listCalendar = new ArrayList<>(); 
-            
-            while(consulta.next()){
-                objCalendar = new Calendar(); 
-                objCalendar.setIdCalendar(consulta.getInt(1));
-                objCalendar.setTitle(consulta.getString(2));
-                objCalendar.setStart(consulta.getString(3));
-                objCalendar.setEnd(consulta.getString(4));
-                objCalendar.setClassName(consulta.getString(9));
-                objCalendar.setUrl(consulta.getString(10));
-               
-               
-                listCalendar.add(objCalendar); 
-                
-            }
-            
-            return listCalendar; 
-            
-        } catch (Exception error) {
-            System.out.println("Error Controlador: " + error);
+    
+    public String CreateRQ(String IdUser_FK, String IdCompany_FK){
+        objRQ.setIdCompany_FK(IdCompany_FK);
+        objRQ.setIdUser_FK(IdUser_FK);
+       
+        if(objRQ.Create()){
+            return objRQ.lastRqCreated();
         }
- 
-        return null;
+    
+        return "err" ;
+        
+    
+           
     }
+        
+   
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

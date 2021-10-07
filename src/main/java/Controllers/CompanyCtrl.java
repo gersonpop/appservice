@@ -53,7 +53,7 @@ Company objCompany = new Company();
                 objCompany.setIdEmpresa_PK(Telefono_Contacto);
                 objCompany.setIdEmpresa_PK(Status);
                 
-                objCompany.createCompany();
+               // objCompany.createCompany();
                
                 
                 String mensaje = "<html><body>"+
@@ -80,7 +80,7 @@ Company objCompany = new Company();
                 objCompany.setIdEmpresa_PK(Telefono_Contacto);
                 objCompany.setIdEmpresa_PK(Status);
                 
-                objCompany.update();           
+                //objCompany.update();           
                 
                 String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
@@ -96,7 +96,7 @@ Company objCompany = new Company();
     public ArrayList show(String IdEmpresa_PK ){
         try {
             objCompany.setIdEmpresa_PK(IdEmpresa_PK);
-            ResultSet consulta = objCompany.show(); 
+            ResultSet consulta = objCompany.listCompany(); 
             ArrayList<Company> listCompany = new ArrayList<>(); 
             
             while(consulta.next()){

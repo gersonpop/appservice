@@ -5,7 +5,8 @@
  */
 package Controllers;
 
-import Models.Calendar;
+
+import Models.Equipo;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -20,9 +21,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Gerson Porras
  */
-@WebServlet(name = "CalendarCtrl", urlPatterns = {"/CalendarCtrl"})
-public class CalendarCtrl extends HttpServlet {
-Calendar objCalendar = new Calendar();
+@WebServlet(name = "EquiposCtrl", urlPatterns = {"/EquiposCtrl"})
+public class EquiposCtrl extends HttpServlet {
+Equipo objEquipo = new Equipo();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,42 +41,39 @@ Calendar objCalendar = new Calendar();
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CalendarCtrl</title>");            
+            out.println("<title>Servlet EquiposCtrl</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CalendarCtrl at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EquiposCtrl at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
     }
 
-    public ArrayList getAll(){
+    public ArrayList obtenerEQporSucursal(int IdSucursal){
         try {
-            ResultSet consulta = objCalendar.getAll(); 
-            ArrayList<Calendar> listCalendar = new ArrayList<>(); 
+            objEquipo.setIdSucursal_FK(IdSucursal);
+            ResultSet consulta = objEquipo.getEQbySucursal(); 
+            ArrayList<Equipo> listaEquipo = new ArrayList<>(); 
             
             while(consulta.next()){
-                objCalendar = new Calendar(); 
-                objCalendar.setIdCalendar(consulta.getInt(1));
-                objCalendar.setTitle(consulta.getString(2));
-                objCalendar.setStart(consulta.getString(3));
-                objCalendar.setEnd(consulta.getString(4));
-                objCalendar.setClassName(consulta.getString(9));
-                objCalendar.setUrl(consulta.getString(10));
-               
-               
-                listCalendar.add(objCalendar); 
+                objEquipo = new Equipo(); 
+                objEquipo.setIdEquipo_PK(consulta.getInt(1));
+                objEquipo.setTAG(consulta.getString(2));
+                
+                listaEquipo.add(objEquipo); 
                 
             }
             
-            return listCalendar; 
+            return listaEquipo; 
             
         } catch (Exception error) {
             System.out.println("Error Controlador: " + error);
-        }
+       
  
-        return null;
+        return null; }
     }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

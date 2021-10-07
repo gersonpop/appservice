@@ -47,12 +47,12 @@
                                                 </select>           
                         <select class="custom-select custom-select-lg mb-3" name="avatar">
                                                                                             <option selected>seleccione un icono</option>
-                                                                                                <option data-content="<i class='fa fa-cutlery' ></i>"  value="1">1</option>
-                                                                                                <option data-content="<i class='fa fa-eye'></i>" value="2">2</option>
-                                                                                                <option data-content="<i class='fa fa-heart-o'></i>" value="34">3</option>
-                                                                                                <option data-content="<i class='fa fa-leaf'></i>" value="4">4</option>
-                                                                                                <option data-content="<i class='fa fa-music'></i>" value="5">6</option>
-                                                                                                <option data-content="<i class='fa fa-star'></i>" value="5">7</option>
+                                                                                                <option data-content="<i class='fa fa-cutlery' ></i>"  value="woman"></i>">mujer</option>
+                                                                                                <option data-content="<i class='fa fa-eye'></i>" value="men"></i>">hombre</option>
+                                                                                                <option data-content="<i class='fa fa-heart-o'></i>" value="<i class="cat"></i>">gato</option>
+                                                                                                <option data-content="<i class='fa fa-leaf'></i>" value="<i class="dog"></i>">perro</option>
+                                                                                                <option data-content="<i class='fa fa-music'></i>" value="<i class="car"></i>">carro</option>
+                                                                                                <option data-content="<i class='fa fa-star'></i>" value="<i class="bicycle"></i>">bicicleta</option>
                                                                                             </select></p>             
                                                                                         
                                                                                                                                                             

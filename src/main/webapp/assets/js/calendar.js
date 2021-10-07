@@ -79,7 +79,7 @@ var defaults = {
 		nextYear: "<span class='fc-text-arrow'>»</span>",
 		today: 'hoy',
 		month: 'mes',
-		week: 'año',
+		week: 'semana',
 		day: 'dia'
 	},
 	

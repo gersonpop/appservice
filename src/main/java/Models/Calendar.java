@@ -18,8 +18,8 @@ import java.util.Date;
 public class Calendar {
 private int IdCalendar;
 private String title;
-private Date start = new Date();
-private Date end = new Date();
+private String start ;
+private String end;
 private String IdUser_FK;
 private String Tipo_Documento;
 private int id_documento;
@@ -49,19 +49,19 @@ private String url;
         this.title = title;
     }
 
-    public Date getStart() {
+    public String getStart() {
         return start;
     }
 
-    public void setStart(Date start) {
+    public void setStart(String start) {
         this.start = start;
     }
 
-    public Date getEnd() {
+    public String getEnd() {
         return end;
     }
 
-    public void setEnd(Date end) {
+    public void setEnd(String end) {
         this.end = end;
     }
 

@@ -4,6 +4,7 @@
     Author     : Gerson Porras
 --%>
 
+<%@page import="com.google.gson.Gson"%>
 <%@page import="Controllers.ControlProducto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Models.Producto"%>
@@ -88,7 +89,8 @@
                         ArrayList<Producto> listaProducto = new ArrayList<>(); 
                         ControlProducto ctrProducto = new ControlProducto(); 
                         listaProducto = ctrProducto.listar(); 
-                        
+                        String json = new Gson().toJson(listaProducto);
+		        System.out.println(json);
                         for(int i=0; i<listaProducto.size();i++){
                     %>
           <tr>

@@ -83,10 +83,10 @@ public class Company {
         Connex objConnex =new Connex();
          objConnex.Connect();
         try{
-            String sql ="SELECT * FROM empresa;";
+            String sql ="SELECT * FROM company;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
-            stmt.setString(1,this.idEmpresa_PK);
+            //stmt.setString(1,this.idEmpresa_PK);
             /*stmt.setString(2,this.Razon_Social);
             stmt.setString(3,this.Representante_Legal);
             stmt.setString(4,this.Actividad_Economica);

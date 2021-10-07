@@ -8,6 +8,8 @@ package Controllers;
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,9 +43,27 @@ public class UserCtrl extends HttpServlet {
                 
                 
                 if(objUser.authUser()){
+                    
+                    User SessionUser= objUser.getUserById();
+                    String Nombre = SessionUser.getUserName();
+                    System.out.println(SessionUser);
+                    
+                               /*                     "localStorage.setItem('UserLastName','" + SessionUser.getUserLastName() +"');"+
+                                "localStorage.setItem('UserEmail','" + SessionUser.getUserEmail() +"');"+
+                                "localStorage.setItem('UserIdCompany_FK()','" + SessionUser.getIdCompany_FK() +"');"+
+                                "localStorage.setItem('UserAvatar()','" + SessionUser.getAvatar() +"');"+ */
+                    
+                    
+                    
                     String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
-                                 "window.location.href='main.jsp'; "+
+                                "localStorage.setItem('IdUser_PK','" + SessionUser.getIdUser_PK()+"');"+
+                                "localStorage.setItem('UserName','" + SessionUser.getUserName()+"');"+
+                                "localStorage.setItem('UserLastName','" + SessionUser.getUserLastName() +"');"+
+                                "localStorage.setItem('UserEmail','" + SessionUser.getUserEmail() +"');"+
+                                "localStorage.setItem('IdCompany_FK','" + SessionUser.getIdCompany_FK() +"');"+
+                                "localStorage.setItem('Avatar','" + SessionUser.getAvatar() +"');"+
+                                "window.location.href='main.jsp'; "+
                                  "</script></body></html>";
                     out.println(mensaje);
                 }
@@ -78,6 +98,7 @@ public class UserCtrl extends HttpServlet {
                
                 
                 if(resultado.equals("")){
+        
                         
                         String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+

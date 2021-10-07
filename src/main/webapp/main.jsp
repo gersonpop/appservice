@@ -4,6 +4,12 @@
     Author     : Gerson Porras
 --%>
 
+<%@page import="com.google.gson.Gson"%>
+<%@page import="Controllers.ControlProducto"%>
+<%@page import="Models.Producto"%>
+<%@page import="Controllers.CalendarCtrl"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Models.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -84,25 +90,38 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 
 <section>
     <nav class="navbar navbar-expand-lg  bg-success  bg-gradient shadow-lg ">
-        <a class="navbar-brand  text-white" href="#">Navbar</a>
+        <a class="navbar-brand  text-white" href="#">RMS AppServices</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link text-white" href="#">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-white" href="main-jsp">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
-              <a class="nav-link text-white " href="#">Requisicion</a>
+                
+              <a id="createRQLink" class="nav-link text-white " href="RequestCreate.jsp">Requisicion</a>
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="#">Cotizacoin</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link text-white disabled" href="/signin.jsp">Salir</a>
-            </li>
-    </ul>
+            
+             
+                        <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <img id="avatar"  width="40" height="40" class="rounded-circle">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="main.jsp">Dashboard</a>
+                          <a class="dropdown-item" href="#">Editar Perfil</a>
+                          <a class="dropdown-item" href="signin.jsp">Cerrar</a>
+                        </div>
+                      </li>
+                
+                
+                
+               </ul>
 
 </section>
 
@@ -125,9 +144,25 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="/assets/js/calendar.js"></script>
+        <%
+            
+                       try{
+                        ArrayList<Calendar> listCalendar = new ArrayList<>(); 
+                        CalendarCtrl ctrCalendar = new CalendarCtrl(); 
+                        listCalendar = ctrCalendar.getAll();
+                        
+                        String json = new Gson().toJson(listCalendar);
+		        System.out.println(json);
+                        
+        //*/%>
+        
+        
         <script>
 
                 $(document).ready(function() {
+                    document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png"
+                    document.getElementById("createRQLink").href="RequestCreate.jsp?IdUser_FK="+localStorage.getItem("IdUser_PK")+"&IdCompany_FK="+localStorage.getItem("IdCompany_FK")
+                    
                     var date = new Date();
                         var d = date.getDate();
                         var m = date.getMonth();
@@ -232,7 +267,9 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 
                                 },
 
-                                events: [
+                                events: <%=json%>
+                                       /* [
+                                            
                                         {
                                                 title: 'All Day Event',
                                                 start: new Date(y, m, 1)
@@ -240,7 +277,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                                         {
                                                 id: 999,
                                                 title: 'Repeating Event',
-                                                start: new Date(y, m, d-3, 16, 0),
+                                                start: "2021-10-06 08:00:00",
                                                 allDay: false,
                                                 className: 'chill'
                                         },
@@ -276,14 +313,23 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                                                 end: new Date(y, m, 29),
                                                 url: 'https://ccp.cloudaccess.net/aff.php?aff=5188',
                                                 className: 'chill'
-                                        }
-                                ],			
+                                        } 
+                                ],	//*/		
                         });
 
 
-                });
+                }
+                    
+                
+    );
 
         </script>
-
+        <%
+            }catch(Exception e){
+                    System.out.println("error al cargar calendario " + e);
+                    
+                   }
+                        
+        //*/%>
     </body>
 </html>

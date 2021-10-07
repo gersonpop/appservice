@@ -5,6 +5,7 @@
  */
 package Models;
 
+import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -102,7 +103,7 @@ public class User {
             objConnex.Disconnect();
             return "";
             
-        }catch(Exception e){
+        }catch(SQLException e){
          System.out.println("Error al crar al usuario " + e);
          return e.toString();
         }
@@ -130,6 +131,35 @@ public class User {
      
      
      //--------------Gerson------------------------
+      public User getUserById(){
+         Connex objConnex =new Connex();
+         objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM users WHERE IdUser_PK = ?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.IdUser_PK);
+             ResultSet resultQuery = stmt.executeQuery();
+             objConnex.Disconnect();
+             User ObjUser = new User();
+             while ( resultQuery.next() ) { 
+                ObjUser.setIdUser_PK(resultQuery.getString("IdUser_PK"));
+                ObjUser.setUserName(resultQuery.getString("userName"));
+                ObjUser.setPassword(resultQuery.getString("Password"));
+                ObjUser.setUserLastName(resultQuery.getString("userLastName"));
+                ObjUser.setIdCompany_FK(resultQuery.getString("idCompany_FK"));
+                ObjUser.setUserEmail(resultQuery.getString("UserEmail"));
+                ObjUser.setAvatar(resultQuery.getString("avatar"));
+
+             }
+             
+            return ObjUser;
+            
+        }catch(SQLException e){
+         System.out.println("Error consultar  al usuario => " + e);
+        }
+        return null;
+    }
      public boolean authUser(){
         Connex objConnex =new Connex();
          objConnex.Connect();
