@@ -27,7 +27,7 @@
 
         
         <section>
-    <nav class="navbar navbar-expand-lg  bg-success  bg-gradient shadow-lg ">
+    <nav class="navbar navbar-expand-lg  bg-success  bg-gradient shadow-lg">
         <a class="navbar-brand  text-white" href="#">RMS AppServices</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -57,7 +57,7 @@
                 
                 
                </ul>
-
+        </div>
 </section>
 
 
@@ -71,11 +71,7 @@
                 <div class="row">
                     <div class="col">
                         <%
-                            /*String CodigoStr = request.getParameter("codigoProducto");
-                            int codigo = Integer.parseInt(CodigoStr.toString());
-                            ControlProducto ctrProducto = new ControlProducto();
-                            ArrayList<Producto> consultaProducto = new ArrayList();
-                            consultaProducto = ctrProducto.consultar(codigo);*/
+                           
                             String IdUser_FK=request.getParameter("IdUser_FK");
                             String IdCompany_FK=request.getParameter("IdCompany_FK");
                             RequestCtrl RQctrl = new RequestCtrl();
@@ -96,6 +92,9 @@
                            
                         </div>
                     </div>
+                            
+                            
+                                
                     <div class="col"><div class="form-floating mb-3">
                             <label for="floatingInput">Fecha inicio </label>
                             <input tipe="date" data-provide="datepicker" placeholder="AAAA-MM-DD">
@@ -157,19 +156,19 @@
         
       
 
-        <script>
-                
-                $(document).ready(function() {
-                    $('.datepicker').datepicker();
-                    
-                    document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png"
-                    document.getElementById("createRQLink").href="RequestCreate.jsp?IdUser_FK="+localStorage.getItem("IdUser_PK")+"&IdCompany_FK="+localStorage.getItem("IdCompany_FK");
-                }
-        </script>
-        <script src="assets/js/bootstrap.min.js" type="text/javascript"></script>
+       
+        
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+ <script>
+                
+                $(document).ready(function() {
+                    
+                    console.log("estamos en plena creacion de RQ");
+                  // 
+                   document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
 
+        </script>
     </body>
 </html>

@@ -114,62 +114,35 @@ public class UserCtrl extends HttpServlet {
                                 mensaje= mensaje + "\"); window.location.href='signin.jsp'; "+ "</script></body></html>";
                                 System.out.println(mensaje);
                                 out.println(mensaje);
-                                
-                                } 
-            
-                
+                } 
             }
-            else if(accion.equals("recovery")){
-                /*int IdUser_PK = Integer.parseInt(request.getParameter("IdUser_PK"));
-                String Password = request.getParameter("Password");
+                else if(accion.equals("recovery")){
+                   System.out.println("Recuperando contraseña"); 
+                    
+                String IdUser_PK = request.getParameter("IdUser_PK");
+                String UserEmail = request.getParameter("UserEmail");
                 
                 objUser.setIdUser_PK(IdUser_PK);
-                objUser.setPassword(Password);
+                objUser.setUserEmail(UserEmail);
                 
-                if(objUser.authUser()){
+                if(objUser.recoveryPSW()){
                     String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
-                                 "alert('usuario o contraseña incorrecto'); "+
-                                 "window.location.href='main.jsp'; "+
+                                 "alert('La contraseña ha sido restaurada por defecto'); "+
+                                 "window.location.href='signin.jsp'; "+
                                  "</script></body></html>";
                     out.println(mensaje);
                 }
                 else{
                     String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
-                                 "alert('usuario o contraseña incorrecto'); "+
-                                 "window.location.href='signin.jsp'; "+
+                                 "alert('El usuario o el correo son incorrectos'); "+
+                                 "window.location.href='recovery.jsp'; "+
                                  "</script></body></html>";
                     out.println(mensaje);
-                }*/
-                
-                /*if(accion.equals("signup")){
-            
-                String UserEmail = request.getParameter("UserEmail");
-                String userName= request.getParameter("userName");
-                String userLastName= request.getParameter("userLastName");
-                int idCompany_FK = Integer.parseInt(request.getParameter("idCompany_FK"));
-                String avatar=request.getParameter("avatar");
-              
-                objUser.setUserEmail(UserEmail);
-                objUser.setUserName(userName);
-                objUser.setUserLastName(userLastName);
-                objUser.setIdCompany_FK(idCompany_FK);
-                objUser.setAvatar(avatar);
-                
-                
-                objUser.create();
-                
-                String mensaje = "<html><body>"+
-                                 " <script type='text/javaScript'> "+
-                                 "alert('Usuario insertado correctamente'); "+
-                                 "window.location.href='index.jsp'; "+
-                                 "</script></body></html>";
-                        
-                        out.println(mensaje); */   
-
-                
+                }
             }
+            
         }
     }
 

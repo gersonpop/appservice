@@ -86,12 +86,6 @@ public class Company {
             String sql ="SELECT * FROM company;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
-            //stmt.setString(1,this.idEmpresa_PK);
-            /*stmt.setString(2,this.Razon_Social);
-            stmt.setString(3,this.Representante_Legal);
-            stmt.setString(4,this.Actividad_Economica);
-            stmt.setString(5,this.Persona_Contacto);
-            stmt.setString(6,this.Telefono_Contacto);*/
             ResultSet resultQuery = stmt.executeQuery();
             objConnex.Disconnect();
              

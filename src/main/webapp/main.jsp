@@ -89,7 +89,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 <body>
 
 <section>
-    <nav class="navbar navbar-expand-lg  bg-success  bg-gradient shadow-lg ">
+    <nav class="navbar navbar-expand  bg-success  bg-gradient shadow-lg ">
         <a class="navbar-brand  text-white" href="#">RMS AppServices</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -122,7 +122,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                 
                 
                </ul>
-
+        </div>
 </section>
 
 

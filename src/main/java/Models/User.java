@@ -117,17 +117,38 @@ public class User {
      
      
      //--------------Liliana------------------------
-     public boolean recoveryPSW(){
-                 // consultas en BD que el IdUser_PK y email existan SELECT * FROM users WHERE IdUser_PK = ? AND UserEmail = ?;"
+    public boolean recoveryPSW(){
+                  //consultas en BD que el IdUser_PK y email existan SELECT * FROM users WHERE IdUser_PK = ? AND UserEmail = ?;"
+        Connex objConnex = new Connex();
+        objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM users WHERE IdUser_PK = ? AND UserEmail = ?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.IdUser_PK);
+            stmt.setString(2,this.UserEmail);
+            ResultSet resultQuery = stmt.executeQuery();
+            
+           
+            while ( resultQuery.next() ) {
                  
-                 //si existe se debe actualiza el password con el idUser con IdUser**  ="UPDATE producto SET Password =?(IdUser**),WHERE IdUser_PK =?;"   ;
-                 
-                 
-        return false;
-     
-         
-     
-     }
+                if(resultQuery.getString("IdUser_PK").equals(this.IdUser_PK)){
+                    sql = "UPDATE users SET Password= ? WHERE IdUser_PK =?;";
+                    stmt = objConnex.conn.prepareStatement(sql);
+                    stmt.setString(1,this.IdUser_PK+"**");
+                    stmt.setString(2,this.IdUser_PK);
+                    stmt.execute();
+                    objConnex.Disconnect();
+
+                    return true;
+                } 
+            }
+            return false;
+        }catch(SQLException e){
+            System.out.println("Error al actualizar usuario " + e);
+            return false;
+        } 
+    }
      
      
      //--------------Gerson------------------------
@@ -164,6 +185,7 @@ public class User {
         Connex objConnex =new Connex();
          objConnex.Connect();
         try{
+            System.out.println("autorizando acceso");
             String sql ="SELECT * FROM users WHERE IdUser_PK = ? AND Password = ?;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);

@@ -24,7 +24,7 @@
     <center>
         <div class="middle">
             <div id="login">
-                <form action="javascript:void(0);" method="get">
+                <form action="UserCtrl" method="POST">
 
                       <fieldset class="clearfix">
 
