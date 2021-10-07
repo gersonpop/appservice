@@ -33,7 +33,7 @@
                         <span class="fa fa-pencil-square-o"></span><input type="text" name="UserLastName" Placeholder="Apellido" required></p> 
                         <p style="display: flex"><span class="fa fa-user"></span><input  style="margin-right: 5px" type="text" name="IdUser_PK" Placeholder="Doc. Identidad" required>
                         <span class="fa fa-at"></span><input type="text" name="UserEmail" Placeholder="e-mail" required></p> 
-                        <p style="display: flex"><select class="form-select" name="IdCompany_FK">
+                        <p style="display: flex"><select class="form-control" name="IdCompany_FK">
                                                                                             <option selected="">Seleccione la empresa</option>
                                                 <% 
                                                 ArrayList<Company> listCompany = new ArrayList<>(); 
@@ -45,8 +45,8 @@
                                                 <option value="<%=listCompany.get(i).getIdEmpresa_PK()%>"><%=listCompany.get(i).getRazon_Social()%></option>
                                                 <%}%>                                                          
                                                 </select>           
-                        <select class="custom-select custom-select-lg mb-3" name="avatar">
-                                                                                            <option selected>seleccione un icono</option>
+                        <select class="custom-select custom-select-mb-3" name="avatar">
+                                                                                            <option selected>Seleccione un icono</option>
                                                                                                 <option data-content="<i class='fa fa-cutlery' ></i>"  value="woman"></i>">mujer</option>
                                                                                                 <option data-content="<i class='fa fa-eye'></i>" value="men"></i>">hombre</option>
                                                                                                 <option data-content="<i class='fa fa-heart-o'></i>" value="<i class="cat"></i>">gato</option>
