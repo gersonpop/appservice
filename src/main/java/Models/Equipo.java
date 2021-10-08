@@ -113,7 +113,8 @@ public class Equipo {
          Connex objConnex =new Connex();
          objConnex.Connect();
         try{
-            String sql ="SELECT IdEquipo_PK, TAG FROM equipos WHERE IdSucursal_FK = ?;";
+            System.out.println("la sucursal es " + this.IdSucursal_FK);
+            String sql ="SELECT IdEquipo_PK, TAG FROM equipo WHERE IdSucursal_FK = ?;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
             stmt.setInt(1,this.IdSucursal_FK);
@@ -123,7 +124,7 @@ public class Equipo {
             return resultQuery;
             
         }catch(SQLException e){
-         System.out.println("Error consultar  al usuario => " + e);
+         System.out.println("Error consultar equipo => " + e);
         }
         return null;
     }

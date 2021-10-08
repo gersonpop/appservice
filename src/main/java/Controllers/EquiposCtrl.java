@@ -7,9 +7,12 @@ package Controllers;
 
 
 import Models.Equipo;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,19 +38,16 @@ Equipo objEquipo = new Equipo();
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EquiposCtrl</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EquiposCtrl at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        try{
+          
         }
+        catch(Exception ex)
+        {   
+            System.out.println("Error en poblar selec con equipo  :"+ex);
+            ex.printStackTrace();
+        }
+        
+        
     }
 
     public ArrayList obtenerEQporSucursal(int IdSucursal){
@@ -87,6 +87,29 @@ Equipo objEquipo = new Equipo();
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+         try{
+            objEquipo.setIdSucursal_FK(Integer.parseInt(request.getParameter("IdSucursal_FK")));
+            JsonArray data_json=new JsonArray();
+            JsonObject json_response=new JsonObject();
+            ResultSet res = objEquipo.getEQbySucursal();
+            while(res.next()){         
+                JsonObject json=new JsonObject();
+                json.addProperty("IdEquipo_PK", res.getString(1));
+                json.addProperty("TAG", res.getString(2));
+                data_json.add(json);
+            }
+            System.out.println(data_json);
+            json_response.add("DataEQ", data_json);
+            response.setContentType("application/Json");
+            response.getWriter().write(json_response.toString());
+            System.out.println(json_response);
+        }
+        catch(IOException | NumberFormatException | SQLException ex)
+        {   
+            System.out.println("Error en poblar selec con equipo  :"+ex);
+        }
+        
     }
 
     /**
@@ -101,6 +124,7 @@ Equipo objEquipo = new Equipo();
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
     }
 
     /**

@@ -116,6 +116,9 @@ public class User {
      public void update(){}
      
      
+     
+     
+     
      //--------------Liliana------------------------
     public boolean recoveryPSW(){
                   //consultas en BD que el IdUser_PK y email existan SELECT * FROM users WHERE IdUser_PK = ? AND UserEmail = ?;"
@@ -128,12 +131,11 @@ public class User {
             stmt.setString(1,this.IdUser_PK);
             stmt.setString(2,this.UserEmail);
             ResultSet resultQuery = stmt.executeQuery();
-            
-           
             while ( resultQuery.next() ) {
-                 
                 if(resultQuery.getString("IdUser_PK").equals(this.IdUser_PK)){
                     sql = "UPDATE users SET Password= ? WHERE IdUser_PK =?;";
+                    
+                    
                     stmt = objConnex.conn.prepareStatement(sql);
                     stmt.setString(1,this.IdUser_PK+"**");
                     stmt.setString(2,this.IdUser_PK);
