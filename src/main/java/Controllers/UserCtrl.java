@@ -5,9 +5,12 @@
  */
 package Controllers;
 
+
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -167,8 +170,62 @@ public class UserCtrl extends HttpServlet {
             System.out.println("Error Controlador " + e);
             }
         }
-    
-    
+    public ArrayList show(String IdUser_PK){
+        try {
+            objUser.setIdUser_PK(IdUser_PK);
+            ResultSet consulta = objUser.showUser(); 
+            ArrayList<User> listUser = new ArrayList<>(); 
+            
+            while(consulta.next()){
+                objUser = new User(); 
+                objUser.setIdUser_PK(consulta.getString(1));
+                objUser.setUserEmail(consulta.getString(2));
+                objUser.setUserName(consulta.getString(3));
+                objUser.setUserLastName(consulta.getString(4));
+                objUser.setIdCompany_FK(consulta.getString(5));
+                objUser.setAvatar(consulta.getString(6));
+                objUser.setPassword(consulta.getString(7));
+                listUser.add(objUser); 
+                
+            }
+            
+          
+            
+        } catch (Exception error) {
+            System.out.println("Error Controlador: " + error);
+        }
+ 
+        return null;
+    }
+   
+    public ArrayList list(){
+        try {
+            ResultSet consulta = objUser.listUser(); 
+            ArrayList<User> listUser = new ArrayList<>(); 
+            
+            while(consulta.next()){
+                objUser = new User(); 
+                objUser.setIdUser_PK(consulta.getString(1));
+                objUser.setUserEmail(consulta.getString(2));
+                objUser.setUserName(consulta.getString(3));
+                objUser.setUserLastName(consulta.getString(4));
+                objUser.setIdCompany_FK(consulta.getString(5));
+                objUser.setAvatar(consulta.getString(6));
+                objUser.setPassword(consulta.getString(7));
+                
+                listUser.add(objUser); 
+                
+            }
+            
+            return listUser; 
+            
+        } catch (Exception error) {
+            System.out.println("Error Controlador: " + error);
+        }
+ 
+        return null;
+    }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
