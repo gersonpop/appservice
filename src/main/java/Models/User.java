@@ -88,7 +88,7 @@ public class User {
      objConnex.Connect();
         
         try{
-            System.out.println("voya ingresar un usuairo");
+            System.out.println("voy a ingresar un usuario");
             String sql ="INSERT INTO users(IdUser_PK, UserEmail,UserName,UserLastName,IdCompany_FK,avatar, Password) VALUES (?, ?,?,?,?,?, ?);";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
@@ -104,16 +104,54 @@ public class User {
             return "";
             
         }catch(SQLException e){
-         System.out.println("Error al crar al usuario " + e);
+         System.out.println("Error al crear usuario " + e);
          return e.toString();
         }
     
      
      }
+     public void update(){
+     Connex objConnex = new Connex();
+     objConnex.Connect();
+        
+        try{
+            String sql ="UPDATE users SET " + 
+                    "UserEmail =?, " +
+                    "Password =?, " +
+                    "userName =?, " +
+                    "userLastName =? " +
+                    "idCompany_FK =?, " +
+                    "avatar =?, " +
+                    "WHERE IdUser_PK  =?;"   ;
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            
+            stmt.setString(1,this.UserEmail);
+            stmt.setString(3,this.userName);
+            stmt.setString(4,this.userLastName);
+            stmt.setString(5,this.idCompany_FK);
+            stmt.setString(6,this.avatar);
+            stmt.setString(2,this.Password);
+            stmt.setString(7,this.IdUser_PK);
+            stmt.execute();
+            objConnex.Disconnect();
+            System.out.println("Actualizando datos usuario");
+           
+            
+        }catch(Exception e){
+         System.out.println("Error Controlador " + e);
+        }
+    }
+     public void delete(){ 
+     Connex objConnex = new Connex();
+     objConnex.Connect();
+     
+     
+     
+     }
      public void list(){}
-     public void delete(){}
+     
      public void show(){}
-     public void update(){}
      
      
      //--------------Liliana------------------------
@@ -212,11 +250,5 @@ public class User {
          System.out.println("Error consultar  usuario => " + e);
         }
        return false;
-     }
-
-
-     
-     
-     
-    
+     }                  
 }
