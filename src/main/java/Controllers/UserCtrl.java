@@ -8,8 +8,6 @@ package Controllers;
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -96,18 +94,16 @@ public class UserCtrl extends HttpServlet {
                 
                 String resultado=  objUser.create();
                
-                
                 if(resultado.equals("")){
-        
                         
-                        String mensaje = "<html><body>"+
+                    String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
                                  "alert('Usuario Agregado correctamente'); "+
                                  "window.location.href='main.jsp'; "+
                                  "</script></body></html>";
                                  out.println(mensaje);
                 }else{resultado.replace("'","");
-                     String mensaje = "<html><body>"+
+                    String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
                                  "alert(\"Error  al crear el usuario: ";
                                 mensaje= mensaje + resultado; 
@@ -116,8 +112,8 @@ public class UserCtrl extends HttpServlet {
                                 out.println(mensaje);
                 } 
             }
-                else if(accion.equals("recovery")){
-                   System.out.println("Recuperando contraseña"); 
+            else if(accion.equals("recovery")){
+                System.out.println("Recuperando contraseña"); 
                     
                 String IdUser_PK = request.getParameter("IdUser_PK");
                 String UserEmail = request.getParameter("UserEmail");
@@ -142,9 +138,37 @@ public class UserCtrl extends HttpServlet {
                     out.println(mensaje);
                 }
             }
-            
+            else if(accion.equals("update")){
+                String IdUser_PK = request.getParameter("IdUser_PK");
+                String UserEmail = request.getParameter("UserEmail");
+                String userName= request.getParameter("UserName");
+                String userLastName= request.getParameter("UserLastName");
+                String idCompany_FK = request.getParameter("IdCompany_FK");
+                String avatar=request.getParameter("avatar");
+                String password = IdUser_PK +"**";
+                
+                objUser.setIdUser_PK(IdUser_PK);
+                objUser.setUserEmail(UserEmail);
+                objUser.setUserName(userName);
+                objUser.setUserLastName(userLastName);
+                objUser.setIdCompany_FK(idCompany_FK);
+                objUser.setAvatar(avatar);
+                objUser.setPassword(password);
+                objUser.update();
+                
+                String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('Producto Actualizado correctamente'); "+
+                                 "window.location.href='index.jsp'; "+
+                                 "</script></body></html>";
+                        out.println(mensaje);
+            }
+            }catch(Exception e){
+            System.out.println("Error Controlador " + e);
+            }
         }
-    }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
