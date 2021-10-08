@@ -176,19 +176,82 @@ public class Request {
         objConnex.Connect();
         
         try{
+
+         
+            
             String sql ="INSERT INTO requerimiento( IdUser_FK, IdCompany_FK) VALUES (?, ?);";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
             stmt.setString(1, this.IdUser_FK);
             stmt.setString(2, this.IdCompany_FK);
-           System.out.println("Estamos crrando una rq");
+         
             stmt.execute();
              objConnex.Disconnect(); 
             return true;
             
              
         }catch(SQLException e){
-         System.out.println("Error al crear la RQ " + e);
+         System.out.println("Error al crear la RQ inicial " + e);
+         return false;
+        } 
+        
+    }
+    /*
+    UPDATE requerimiento 
+    SET Fecha_Solicitud=?,fecha_inicio_req=?,fecha_fin_req=?,IdCotizacion=?,
+    Fecha_Cotizacion=?,Fecha_Aprov_Cot=?,IdOrdenServicio=?,Fecha_Ejec_Ord_Serv=?,IdInforme=?,Fecha_Informe=?,
+    IdEncuestasSatisf=?,Fecha_Encuesta=?,Estado=?,IdUser_FK=?,IdCompany_FK=?,RQDescripcion=? WHERE IdRequerimiento_PK=?;
+    
+    
+    */
+    public Boolean DeleteTemp(){
+        Connex objConnex = new Connex();
+        objConnex.Connect();
+        try{
+            String sql ="DELETE FROM requerimiento WHERE IdUser_FK=? AND IdCompany_FK=? AND  Estado='temp' ";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1, this.IdUser_FK);
+            stmt.setString(2, this.IdCompany_FK);
+         
+            stmt.execute();
+            objConnex.Disconnect(); 
+            System.out.println("Estamos borrando las RQ temporales");
+            
+             return true;
+            
+             
+        }catch(SQLException e){
+         System.out.println("Error al borrar rq la RQ inicial " + e);
+         return false;
+        } 
+        
+    }
+    
+    public Boolean UpdateCliente(){
+        Connex objConnex = new Connex();
+        objConnex.Connect();
+        
+        try{
+            String sql ="UPDATE requerimiento " +
+                    "    SET fecha_inicio_req=?,fecha_fin_req=? , " +
+                    "    Estado=?, RQDescripcion=? WHERE IdRequerimiento_PK=?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1, this.fecha_inicio_req);
+            stmt.setString(2, this.fecha_fin_req);
+            stmt.setString(3, this.Estado);
+            System.out.println("Estamos actualizando RQ Cliente =>" + this.RQDescripcion);
+            
+            stmt.setString(4, this.RQDescripcion);
+            stmt.setInt(5, this.IdRequerimiento_PK);
+            stmt.execute();
+            objConnex.Disconnect(); 
+            return true;
+            
+             
+        }catch(SQLException e){
+         System.out.println("Error al actualizar la RQ Cliente" + e);
          return false;
         } 
         
@@ -198,19 +261,43 @@ public class Request {
         objConnex.Connect();
         
         try{
-            System.out.println("voya consultar la ultimna rq un usuairo");
-            String sql ="SELECT IdRequerimiento_PK FROM requerimiento WHERE  Estado='temp' order by IdRequerimiento_PK desc limit 1;";
+            String sql ="SELECT IdRequerimiento_PK FROM requerimiento WHERE IdUser_FK=? AND IdCompany_FK=? AND  Estado='temp' order by IdRequerimiento_PK desc limit 1;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
-            //stmt.setString(1, this.IdUser_FK);
-            //stmt.setString(2, this.IdCompany_FK);
+            stmt.setString(1, this.IdUser_FK);
+            stmt.setString(2, this.IdCompany_FK);
             ResultSet resultQuery = stmt.executeQuery();
             objConnex.Disconnect();  
-            System.out.println("Estamos llamando ela ultima rq creada");
+            System.out.println("Estamos obteniendo ela ultima rq creada");
              while ( resultQuery.next() ){
             String idRQ = resultQuery.getString(1); 
             return idRQ;
              }
+             
+        }catch(SQLException e){
+         System.out.println("Error al consultar la ultima RQ " + e);
+         
+        } 
+       return "err"; 
+    }
+    
+    
+    public String GetRqByID(){
+        Connex objConnex = new Connex();
+        objConnex.Connect();
+        
+        try{
+            String sql ="SELECT IdRequerimiento_PK FROM requerimiento WHERE IdRequerimiento_PK=? ;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setInt(1, this.IdRequerimiento_PK);
+            ResultSet resultQuery = stmt.executeQuery();
+            objConnex.Disconnect();  
+            System.out.println("Estamos obteniendo una RQ especifica");
+            while ( resultQuery.next() ){
+                String idRQ = resultQuery.getString(1); 
+            return idRQ;
+            }
              
         }catch(SQLException e){
          System.out.println("Error al consultar la ultima RQ " + e);

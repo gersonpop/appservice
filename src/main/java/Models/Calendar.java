@@ -154,4 +154,37 @@ private String url;
       
            
     }
+     
+      public boolean InsertDate(){
+        Connex objConnex =new Connex();
+        objConnex.Connect();
+        try{
+             String sql ="INSERT INTO `calendar`"
+                     + "( `title`, `start`, `end`, `IdUser_FK`, `Tipo_Documento`, `id_documento`, `estado`, `className`, `url`)"
+                     + " VALUES "
+                     + "(?,?,?,?,?,?,?,?,?);";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.title);
+            stmt.setString(2,this.start);
+            stmt.setString(3,this.end);
+            stmt.setString(4,this.IdUser_FK);
+            stmt.setString(5,this.Tipo_Documento);
+            stmt.setInt(6,this.id_documento);
+            stmt.setString(7,this.estado);
+            stmt.setString(8,this.className);
+            stmt.setString(9,this.url);
+             stmt.execute();
+             objConnex.Disconnect();
+             System.out.println("estoy agregando cita a calendario sql");
+             
+            return true;
+
+        }catch(SQLException e){
+         System.out.println("Error agregar cita a calenario  " + e);
+        }
+        //return false;
+      
+           
+    }
 }

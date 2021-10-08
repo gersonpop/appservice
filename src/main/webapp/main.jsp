@@ -104,7 +104,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
               <a id="createRQLink" class="nav-link text-white " href="RequestCreate.jsp">Requisicion</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white" href="#">Cotizacoin</a>
+              <a class="nav-link text-white" href="#">Cotización</a>
             </li>
             
              
