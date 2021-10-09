@@ -141,31 +141,19 @@ public class UserCtrl extends HttpServlet {
                     out.println(mensaje);
                 }
             }
-            else if(accion.equals("update")){
+             else if(accion.equals("delete")){
                 String IdUser_PK = request.getParameter("IdUser_PK");
-                String UserEmail = request.getParameter("UserEmail");
-                String userName= request.getParameter("UserName");
-                String userLastName= request.getParameter("UserLastName");
-                String idCompany_FK = request.getParameter("IdCompany_FK");
-                String avatar=request.getParameter("avatar");
-                String password = IdUser_PK +"**";
-                
                 objUser.setIdUser_PK(IdUser_PK);
-                objUser.setUserEmail(UserEmail);
-                objUser.setUserName(userName);
-                objUser.setUserLastName(userLastName);
-                objUser.setIdCompany_FK(idCompany_FK);
-                objUser.setAvatar(avatar);
-                objUser.setPassword(password);
-                objUser.update();
                 
+                objUser.delete();
                 String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
-                                 "alert('Producto Actualizado correctamente'); "+
-                                 "window.location.href='index.jsp'; "+
+                                 "alert('Producto Eliminado correctamente'); "+
+                                 "window.location.href='index2.jsp'; "+
                                  "</script></body></html>";
                         out.println(mensaje);
             }
+                                    
             }catch(Exception e){
             System.out.println("Error Controlador " + e);
             }
@@ -187,9 +175,7 @@ public class UserCtrl extends HttpServlet {
                 objUser.setPassword(consulta.getString(7));
                 listUser.add(objUser); 
                 
-            }
-            
-          
+            } 
             
         } catch (Exception error) {
             System.out.println("Error Controlador: " + error);
