@@ -5,7 +5,7 @@
  */
 package Models;
 
-import java.sql.Array;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -145,18 +145,59 @@ public class User {
      public void delete(){ 
      Connex objConnex = new Connex();
      objConnex.Connect();
+        try{
+            String sql ="DELETE * FROM users"+ "WHERE IdUser_PK = ?;";
+            PreparedStatement stmt;
+            stmt =objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,String.valueOf(this.IdUser_PK));
+            stmt.execute();
+            objConnex.Disconnect();
+        }catch(Exception e){
+         System.out.println("Error al eliminar " + e);
+        
      
-     
-     
+        }
      }
-     public void list(){}
-     
-     public void show(){}
-     
-     
-     
-     
-     
+     public ResultSet listUser(){
+     Connex objConnex =new Connex();
+     objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM User;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            ResultSet resultQuery = stmt.executeQuery();
+            objConnex.Disconnect();
+             
+            return resultQuery;
+            
+        }catch(SQLException e){
+         System.out.println("Error Listar Productos => " + e);
+        }
+        return null;
+       
+    }
+          
+         
+     public ResultSet showUser(){
+     Connex objConnex =new Connex();
+     objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM users WHERE IdUser_PK = ?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.IdUser_PK);
+            ResultSet resultQuery = stmt.executeQuery();
+            objConnex.Disconnect();
+            System.out.println("Consultar datos usuario");
+            return resultQuery; 
+            
+            }catch(SQLException e){
+             System.out.println("Error consultando usuario => " + e);
+            }       
+            return null;
+        }
+    
+            
      //--------------Liliana------------------------
     public boolean recoveryPSW(){
                   //consultas en BD que el IdUser_PK y email existan SELECT * FROM users WHERE IdUser_PK = ? AND UserEmail = ?;"
@@ -250,7 +291,7 @@ public class User {
             
         }catch(SQLException e){
          System.out.println("Error consultar  usuario => " + e);
-        }
+       }
        return false;
      }                  
 }
