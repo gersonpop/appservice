@@ -1,3 +1,10 @@
+<%-- 
+    Document   : userview
+    Created on : 10/10/2021, 11:09:10 AM
+    Author     : Gerson Porras
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
@@ -45,7 +52,7 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col">
                         <a>
-                            <img id="avatar"  width="400" height="400" class="rounded-circle">
+                            <img id="avatarXL"  width="400" height="400" class="rounded-circle">
                         </a>                        
                     </div>
                     <div class="col">
@@ -68,5 +75,18 @@ and open the template in the editor.
                 </div>
             </form>
         </section>
+                        <script  src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+        <script type="text/javascript" src="/assets/js/jquery.tabletojson.js "></script>
+            <script>
+                $(document).ready(function() {
+                    document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
+                    document.getElementById("avatarXL").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
+                    
+                });
+        </script>
     </body>
 </html>

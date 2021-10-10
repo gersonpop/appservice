@@ -114,7 +114,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                           <img id="avatar"  width="40" height="40" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="#">Editar Perfil</a>
+                          <a class="dropdown-item" href="userview.jsp">Editar Perfil</a>
                           <a class="dropdown-item" href="signin.jsp">Cerrar</a>
                         </div>
                       </li>

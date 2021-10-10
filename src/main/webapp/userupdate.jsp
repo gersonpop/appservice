@@ -1,3 +1,10 @@
+<%-- 
+    Document   : userupdate
+    Created on : 10/10/2021, 11:09:28 AM
+    Author     : Gerson Porras
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!--
 To change this license header, choose License Headers in Project Properties.
