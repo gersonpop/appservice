@@ -52,7 +52,7 @@ and open the template in the editor.
                 <div class="row">
                     <div class="col">
                         <a>
-                            <img id="avatar"  width="400" height="400" class="rounded-circle">
+                            <img id="avatarXL"  width="400" height="400" class="rounded-circle">
                         </a>                        
                     </div>
                     <div class="col">
