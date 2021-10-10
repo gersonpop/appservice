@@ -64,7 +64,7 @@ public class UserCtrl extends HttpServlet {
                                 "localStorage.setItem('UserEmail','" + SessionUser.getUserEmail() +"');"+
                                 "localStorage.setItem('IdCompany_FK','" + SessionUser.getIdCompany_FK() +"');"+
                                 "localStorage.setItem('Avatar','" + SessionUser.getAvatar() +"');"+
-                                "window.location.href='main.jsp'; "+
+                                "window.location.href='main.jsp?Id="+SessionUser.getIdUser_PK()+"'; "+
                                  "</script></body></html>";
                     out.println(mensaje);
                 }
@@ -102,7 +102,7 @@ public class UserCtrl extends HttpServlet {
                     String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
                                  "alert('Usuario Agregado correctamente'); "+
-                                 "window.location.href='main.jsp'; "+
+                                 "window.location.href='signup.jsp'; "+
                                  "</script></body></html>";
                                  out.println(mensaje);
                 }else{resultado.replace("'","");
@@ -110,7 +110,7 @@ public class UserCtrl extends HttpServlet {
                                  " <script type='text/javaScript'> "+
                                  "alert(\"Error  al crear el usuario: ";
                                 mensaje= mensaje + resultado; 
-                                mensaje= mensaje + "\"); window.location.href='signin.jsp'; "+ "</script></body></html>";
+                                mensaje= mensaje + "\"); window.location.href='signup.jsp'; "+ "</script></body></html>";
                                 System.out.println(mensaje);
                                 out.println(mensaje);
                 } 
@@ -170,7 +170,7 @@ public class UserCtrl extends HttpServlet {
             System.out.println("Error Controlador " + e);
             }
         }
-    public ArrayList show(String IdUser_PK){
+   /* public ArrayList show(String IdUser_PK){
         try {
             objUser.setIdUser_PK(IdUser_PK);
             ResultSet consulta = objUser.showUser(); 
@@ -224,7 +224,7 @@ public class UserCtrl extends HttpServlet {
         }
  
         return null;
-    }
+    }*/
 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
