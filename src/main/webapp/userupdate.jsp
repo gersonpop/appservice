@@ -47,7 +47,7 @@ and open the template in the editor.
         </section>
         <br>
         <section class="container">
-            <form method="GET" action="UserViewCtrl">
+            <form method="POST" action="UserConfCtrl">
                 <h3>MI PERFIL</h3>  
                 <div class="row">
                     <div class="col">
@@ -56,40 +56,53 @@ and open the template in the editor.
                         </a>                        
                     </div>
                     <div class="col">
-                        <div class="form-floating mb-3">
-                            <label for="floatingInput">Id Usuario </label><input type="text" class="form-control"  required="" readonly value="<%%>">
+                        <div class="row"> 
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <label for="floatingInput">Id Usuario </label><input type="text" class="form-control"  required="" readonly value="<%%>">
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <label for="floatingInput">Empresa</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
+                                </div>
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="floatingInput">Nombre</label><input type="text" class="form-control"   required="" readonly value="<%%>">
+                            <label for="floatingInput">Nombre</label><input type="text" class="form-control" required="" readonly value="<%%>">
                         </div>
                         <div class="form-floating mb-3">
                             <label for="floatingInput">Apellido</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="floatingInput">Empresa</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
+                            <label for="floatingInput">Correo</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
                         </div>
                         <div class="form-floating mb-3">
                             <label for="floatingInput">Rol</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
                         </div>
-                        <button type="button" class="btn btn-success">Actualizar</button>
+                        <center>
+                            <button type="button" class="btn btn-success">Actualizar</button>
+                            <a href="main.jsp"><button type="button" class="btn btn-danger"btn >Cancelar</button></a>
+                            <a href="changePSW.jsp"><button type="button" class="btn btn-secondary">Cambiar Contraseña</button></a>
+                        </center>
                     </div>
                 </div>
             </form>
         </section>
-                        
+
         <script  src="https://code.jquery.com/jquery-3.6.0.min.js"  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="  crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
         <script type="text/javascript" src="/assets/js/jquery.tabletojson.js "></script>
-            <script>
-                $(document).ready(function() {
-                    document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
-                    document.getElementById("avatarXL").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
-                    
-                });
+        <script>
+            $(document).ready(function () {
+                document.getElementById("avatar").src = "/assets/img/" + localStorage.getItem("Avatar") + ".png";
+                document.getElementById("avatarXL").src = "/assets/img/" + localStorage.getItem("Avatar") + ".png";
+
+            });
         </script>
-                        
+
     </body>
 </html>
