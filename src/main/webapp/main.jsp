@@ -114,7 +114,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                           <img id="avatar"  width="40" height="40" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="userview.jsp">Editar Perfil</a>
+                          <a class="dropdown-item" href="userview.jsp" id="userProfile">Editar Perfil</a>
                           <a class="dropdown-item" href="signin.jsp">Cerrar</a>
                         </div>
                       </li>
@@ -147,6 +147,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
         <%
             
                        try{
+                        
                         String Id=request.getParameter("Id");
                         ArrayList<Calendar> listCalendar = new ArrayList<>(); 
                         CalendarCtrl ctrCalendar = new CalendarCtrl(); 
@@ -164,6 +165,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                 $(document).ready(function() {
                     document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png"
                     document.getElementById("main").href="main.jsp?Id="+localStorage.getItem("IdUser_PK")
+                    document.getElementById("userProfile").href="userview.jsp?Id="+localStorage.getItem("IdUser_PK")
                     document.getElementById("createRQLink").href="RequestCreate.jsp?IdUser_FK="+localStorage.getItem("IdUser_PK")+"&IdCompany_FK="+localStorage.getItem("IdCompany_FK")
                     
                     var date = new Date();

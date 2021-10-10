@@ -293,5 +293,22 @@ public class User {
          System.out.println("Error consultar  usuario => " + e);
        }
        return false;
-     }                  
+     }  
+     public ResultSet viewProfile(){
+        Connex objConnex = new Connex();
+        objConnex.Connect();
+        try{
+            String sql ="SELECT * FROM users WHERE IdUser_PK = ?;";
+            PreparedStatement stmt;
+            stmt = objConnex.conn.prepareStatement(sql);
+            stmt.setString(1,this.IdUser_PK);
+            ResultSet consulta = stmt.executeQuery();
+            objConnex.Disconnect();
+            return consulta;
+        }
+        catch(SQLException e){
+         System.out.println("Error al consultar usuario " + e);
+        }
+        return null;
+    }
 }

@@ -158,6 +158,32 @@ public class UserCtrl extends HttpServlet {
             System.out.println("Error Controlador " + e);
             }
         }
+    
+    public User show(String IdUser_PK){
+        try {
+            objUser.setIdUser_PK(IdUser_PK);
+            ResultSet consulta = objUser.viewProfile(); 
+            
+            while(consulta.next()){
+                objUser = new User(); 
+                objUser.setIdUser_PK(consulta.getString(1));
+                objUser.setUserEmail(consulta.getString(2));
+                objUser.setPassword(consulta.getString(3));
+                objUser.setUserName(consulta.getString(4));
+                objUser.setUserLastName(consulta.getString(5));
+                objUser.setIdCompany_FK(consulta.getString(6));
+                objUser.setAvatar(consulta.getString(7));
+                return objUser;
+                
+            } 
+            return null;
+
+        } catch (Exception error) {
+           System.out.println("Error Controlador de mostrar usuario: " + error);
+        }
+ 
+        return null;
+    }
    /* public ArrayList show(String IdUser_PK){
         try {
             objUser.setIdUser_PK(IdUser_PK);

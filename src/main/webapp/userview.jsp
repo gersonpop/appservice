@@ -1,8 +1,7 @@
-<%-- 
-    Document   : userview
-    Created on : 10/10/2021, 11:09:10 AM
-    Author     : Gerson Porras
---%>
+<%@page import="Controllers.UserCtrl"%>
+<%@page import="Models.User"%>
+
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -38,7 +37,7 @@ and open the template in the editor.
                                 <img id="avatar"  width="40" height="40" class="rounded-circle">
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="userupdate">Editar Perfil</a>
+                                <a class="dropdown-item" href="userupdate" id="userEditar">Editar Perfil</a>
                                 <a class="dropdown-item" href="signin.jsp">Cerrar</a>
                             </div>
                         </li>
@@ -47,8 +46,14 @@ and open the template in the editor.
         </section>
         <br>
         <section class="container">
-            <form method="GET" action="UserViewCtrl">
-                <h3>MI PERFIL</h3>  
+            <form method="GET" action="UserCtrl">
+                <h3>MI PERFIL</h3> 
+                 <%
+                           
+                            String IdUser_FK=request.getParameter("Id");
+                            UserCtrl userctrl = new UserCtrl();
+                            User user = userctrl.show(IdUser_FK);                           
+                                                    %>
                 <div class="row">
                     <div class="col">
                         <a>
@@ -56,21 +61,33 @@ and open the template in the editor.
                         </a>                        
                     </div>
                     <div class="col">
-                        <div class="form-floating mb-3">
-                            <label for="floatingInput">Id Usuario </label><input type="text" class="form-control"  required="" readonly value="<%%>">
+                     <div class="col">
+                        <div class="row"> 
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <label for="floatingInput">Id Usuario</label><input id="Id" type="text" class="form-control" required="" readonly value="<%=user.getIdUser_PK()%>" >
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-floating mb-3">
+                                    <label for="floatingInput">Empresa</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%=user.getIdCompany_FK()%>" >
+                                </div>
+                            </div>
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="floatingInput">Nombre</label><input type="text" class="form-control"   required="" readonly value="<%%>">
+                            <label for="floatingInput">Nombre</label><input type="text" class="form-control"   required="" readonly value="<%=user.getUserName()%>">
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="floatingInput">Apellido</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
+                            <label for="floatingInput">Apellido</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%=user.getUserLastName() %>" >
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="floatingInput">Empresa</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
+                            <label for="floatingInput">Correo</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%=user.getUserEmail()%>" >
                         </div>
                         <div class="form-floating mb-3">
-                            <label for="floatingInput">Rol</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%%>" >
+                            <label for="floatingInput">Avatar</label><input type="text" class="form-control" id="floatingInput"  required="" readonly value="<%=user.getAvatar()%>" >
                         </div>
+                        <a href="userupdate.jsp"><button type="button" class="btn btn-success" name="btnAccion" id="userUpdate">Actualizar</button></a>
+                        <a href="main.jsp"><button type="button" class="btn btn-danger" name="btnAccion">Cancelar</button></a>
                     </div>
                 </div>
             </form>
@@ -85,8 +102,9 @@ and open the template in the editor.
                 $(document).ready(function() {
                     document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
                     document.getElementById("avatarXL").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
-                    
+                    document.getElementById("userEditar").href="userview.jsp?Id="+localStorage.getItem("IdUser_PK")
+                    document.getElementById("userUpdate").href="userupdate.jsp?Id="+localStorage.getItem("IdUser_PK")
                 });
-        </script>
+            </script>
     </body>
 </html>
