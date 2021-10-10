@@ -35,7 +35,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link text-white" href="main.jsp">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-white" id="main" >Inicio <span class="sr-only">(current)</span></a>
             </li>
            
             <li class="nav-item">
@@ -48,8 +48,7 @@
                           <img id="avatar"  width="40" height="40" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="main.jsp">Dashboard</a>
-                          <a class="dropdown-item" href="#">Editar Perfil</a>
+                          <a class="dropdown-item" href="userview.jsp">Editar Perfil</a>
                           <a class="dropdown-item" href="signin.jsp">Cerrar</a>
                         </div>
                       </li>
@@ -164,6 +163,7 @@
         <script type="text/javascript" src="/assets/js/jquery.tabletojson.js "></script>
             <script>
                 $(document).ready(function() {
+                    document.getElementById("main").href="main.jsp?Id="+localStorage.getItem("IdUser_PK")
                     $('input[name="datefilter"]').daterangepicker({
                         autoUpdateInput: false,
                         locale: {

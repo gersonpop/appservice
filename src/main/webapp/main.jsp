@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="com.google.gson.Gson"%>
+
 <%@page import="Controllers.ControlProducto"%>
 <%@page import="Models.Producto"%>
 <%@page import="Controllers.CalendarCtrl"%>
@@ -97,7 +98,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link text-white" href="main-jsp">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-white" id="main" href="main.jsp">Inicio <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item ">
                 
@@ -113,7 +114,6 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
                           <img id="avatar"  width="40" height="40" class="rounded-circle">
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                          <a class="dropdown-item" href="main.jsp">Dashboard</a>
                           <a class="dropdown-item" href="#">Editar Perfil</a>
                           <a class="dropdown-item" href="signin.jsp">Cerrar</a>
                         </div>
@@ -147,9 +147,11 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
         <%
             
                        try{
+                        String Id=request.getParameter("Id");
                         ArrayList<Calendar> listCalendar = new ArrayList<>(); 
                         CalendarCtrl ctrCalendar = new CalendarCtrl(); 
-                        listCalendar = ctrCalendar.getAll();
+                        
+                        listCalendar = ctrCalendar.getById(Id);
                         
                         String json = new Gson().toJson(listCalendar);
 		        System.out.println(json);
@@ -161,6 +163,7 @@ box-shadow: 0px 0px 21px 2px rgba(0,0,0,0.18);
 
                 $(document).ready(function() {
                     document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png"
+                    document.getElementById("main").href="main.jsp?Id="+localStorage.getItem("IdUser_PK")
                     document.getElementById("createRQLink").href="RequestCreate.jsp?IdUser_FK="+localStorage.getItem("IdUser_PK")+"&IdCompany_FK="+localStorage.getItem("IdCompany_FK")
                     
                     var date = new Date();

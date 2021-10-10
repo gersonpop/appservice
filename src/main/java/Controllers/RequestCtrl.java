@@ -6,14 +6,22 @@
 package Controllers;
 
 import Models.Calendar;
+import Models.RQDetails;
 import Models.Request;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Iterator;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 
 /**
  *
@@ -23,6 +31,7 @@ import javax.servlet.http.HttpServletResponse;
 public class RequestCtrl extends HttpServlet {
     Request objRQ = new Request();
     Calendar userCal = new Calendar();
+    RQDetails objRQDetails = new RQDetails();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,12 +80,25 @@ public class RequestCtrl extends HttpServlet {
                         userCal.setId_documento(objRQ.getIdRequerimiento_PK());
                         userCal.setEstado("Solicitado");
                         userCal.setClassName("Solicitado");
-                        userCal.setUrl("Request.jsp?IdRequerimiento_PK="+ objRQ.getIdRequerimiento_PK());
+                        userCal.setUrl("Request.jsp?Id="+ objRQ.getIdRequerimiento_PK());
                         userCal.InsertDate();
+                        
+                        
+                        JsonArray array = new JsonParser().parse(RQJSon).getAsJsonArray();
+                        for(int i = 0 ; i < array.size() ; i++){
+                            RQDetails RQDtls = new RQDetails();
+                            RQDtls.setIdRequerimiento_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("RQ").getAsString()));
+                            RQDtls.setIdSucursal_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("Id Sucursal").getAsString()));
+                            RQDtls.setIdEquipo_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("Id Equipo").getAsString()));
+                            RQDtls.setDescripcion_RQ(array.get(i).getAsJsonObject().get("Solicitud").getAsString());
+                            RQDtls.setEstado(array.get(i).getAsJsonObject().get("Estado").getAsString());
+                            RQDtls.InsertItem();
+                        }
+                        
                         String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
                                  "alert('RQ "+ request.getParameter("IdRequerimiento_PK") +" Creada correctamente'); "+
-                                 "window.location.href='main.jsp'; "+
+                                 "window.location.href='main.jsp?Id="+objRQ.getIdUser_FK()+"'; "+
                                  "</script></body></html>";
                         
                         out.println(mensaje);
@@ -106,14 +128,41 @@ public class RequestCtrl extends HttpServlet {
         if(objRQ.Create()){
             return objRQ.lastRqCreated();
         }
-    
         return "err" ;
-        
-    
-           
     }
-        
-   
+    
+    public Request getRQbyID(String Id){
+        objRQ.setIdRequerimiento_PK(Integer.parseInt(Id));
+        return objRQ.GetRqByID();
+    }
+
+     public ArrayList getRQDestails(int RQ){
+        try {
+            objRQDetails.setIdRequerimiento_FK(RQ);
+            ResultSet consulta = objRQDetails.getByIdRQ(); 
+            ArrayList<RQDetails> listaRQDetails = new ArrayList<>(); 
+            
+            while(consulta.next()){
+                objRQDetails = new RQDetails(); 
+                objRQDetails.setIdDeralleRQ_PK(consulta.getInt(1));
+                objRQDetails.setIdRequerimiento_FK(consulta.getInt(2));
+                objRQDetails.setIdSucursal_FK(consulta.getInt(3));
+                objRQDetails.setIdEquipo_FK(consulta.getInt(4));
+                objRQDetails.setDescripcion_RQ(consulta.getString(5));
+                objRQDetails.setEstado(consulta.getString(6));
+                listaRQDetails.add(objRQDetails); 
+                
+            }
+            
+            return listaRQDetails; 
+            
+        } catch (Exception error) {
+            System.out.println("Error Controlador: " + error);
+        }
+ 
+        return null;
+    }
+    
     
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

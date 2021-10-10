@@ -176,20 +176,14 @@ public class Request {
         objConnex.Connect();
         
         try{
-
-         
-            
             String sql ="INSERT INTO requerimiento( IdUser_FK, IdCompany_FK) VALUES (?, ?);";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
             stmt.setString(1, this.IdUser_FK);
             stmt.setString(2, this.IdCompany_FK);
-         
             stmt.execute();
              objConnex.Disconnect(); 
             return true;
-            
-             
         }catch(SQLException e){
          System.out.println("Error al crear la RQ inicial " + e);
          return false;
@@ -282,12 +276,12 @@ public class Request {
     }
     
     
-    public String GetRqByID(){
+    public Request GetRqByID(){
         Connex objConnex = new Connex();
         objConnex.Connect();
         
         try{
-            String sql ="SELECT IdRequerimiento_PK FROM requerimiento WHERE IdRequerimiento_PK=? ;";
+            String sql ="SELECT * FROM requerimiento WHERE IdRequerimiento_PK=? ;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
             stmt.setInt(1, this.IdRequerimiento_PK);
@@ -295,15 +289,33 @@ public class Request {
             objConnex.Disconnect();  
             System.out.println("Estamos obteniendo una RQ especifica");
             while ( resultQuery.next() ){
-                String idRQ = resultQuery.getString(1); 
-            return idRQ;
+                Request res = new Request();
+                res.setIdRequerimiento_PK(resultQuery.getInt(1)); 
+                res.setFecha_Solicitud(resultQuery.getString(2));
+                res.setFecha_inicio_req(resultQuery.getString(3));
+                res.setFecha_fin_req(resultQuery.getString(4));
+                res.setIdCotizacion(resultQuery.getInt(5));
+                res.setFecha_Cotizacion(resultQuery.getString(6));
+                res.setFecha_Aprov_Cot(resultQuery.getString(7));
+                res.setIdOrdenServicio(resultQuery.getInt(8));
+                res.setFecha_Ejec_Ord_Serv(resultQuery.getString(9));
+                res.setIdInforme(resultQuery.getInt(10));
+                res.setFecha_Informe(resultQuery.getString(11));
+                res.setIdEncuestasSatisf(resultQuery.getInt(12));
+                res.setFecha_Encuesta(resultQuery.getString(13));
+                res.setEstado(resultQuery.getString(14));
+                res.setIdUser_FK(resultQuery.getString(15));
+                res.setIdCompany_FK(resultQuery.getString(16));
+                res.setRQDescripcion(resultQuery.getString(17));
+
+            return  res;
             }
              
         }catch(SQLException e){
          System.out.println("Error al consultar la ultima RQ " + e);
          
         } 
-       return "err"; 
+       return null; 
     }
         
   

@@ -127,23 +127,23 @@ private String url;
             return resultQuery;
 
         }catch(SQLException e){
-         System.out.println("Error Listar Productos => " + e);
+         System.out.println("Error Listar Calendario => " + e);
         }
         return null;
       
            
     }
-     public ResultSet getById(){
+    public ResultSet getById(){
         Connex objConnex =new Connex();
         objConnex.Connect();
         try{
-             String sql ="SELECT * FROM calendar WHERE IDUser_FK = ?;";
+            
+            String sql ="SELECT * FROM calendar WHERE IdUser_FK = ?;";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
             stmt.setString(1,this.IdUser_FK);
-             ResultSet resultQuery = stmt.executeQuery();
-             objConnex.Disconnect();
-             System.out.println("estoy consultando calendario sql");
+            ResultSet resultQuery = stmt.executeQuery();
+            objConnex.Disconnect();
              
             return resultQuery;
 
@@ -153,9 +153,8 @@ private String url;
         return null;
       
            
-    }
-     
-      public boolean InsertDate(){
+    } 
+    public boolean InsertDate(){
         Connex objConnex =new Connex();
         objConnex.Connect();
         try{
@@ -183,8 +182,6 @@ private String url;
         }catch(SQLException e){
          System.out.println("Error agregar cita a calenario  " + e);
         }
-        //return false;
-      
-           
+        return false;      
     }
 }

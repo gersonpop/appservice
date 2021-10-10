@@ -76,6 +76,36 @@ Calendar objCalendar = new Calendar();
  
         return null;
     }
+    
+    public ArrayList getById(String Id){
+        try {
+            objCalendar.setIdUser_FK(Id);
+            ResultSet consulta = objCalendar.getById(); 
+            ArrayList<Calendar> listCalendar = new ArrayList<>(); 
+            
+            while(consulta.next()){
+                objCalendar = new Calendar(); 
+                objCalendar.setIdCalendar(consulta.getInt(1));
+                objCalendar.setTitle(consulta.getString(2));
+                objCalendar.setStart(consulta.getString(3));
+                objCalendar.setEnd(consulta.getString(4));
+                objCalendar.setClassName(consulta.getString(9));
+                objCalendar.setUrl(consulta.getString(10));
+               
+               
+                listCalendar.add(objCalendar); 
+                
+            }
+            
+            return listCalendar; 
+            
+        } catch (Exception error) {
+            System.out.println("Error Controlador: " + error);
+        }
+ 
+        return null;
+    }
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

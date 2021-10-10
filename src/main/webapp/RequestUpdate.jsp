@@ -37,7 +37,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="nav navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link text-white" id="main" href="main.jsp">Inicio <span class="sr-only">(current)</span></a>
+              <a class="nav-link text-white" id="main" >Inicio <span class="sr-only">(current)</span></a>
             </li>
            
             <li class="nav-item">
@@ -67,83 +67,63 @@
 
         
         <section class="container">
-            
-                <h3>RQ</h3>
+            <form method="GET" action="RequestCtrl">
+                <h3>Crear RQ</h3>
                 <div class="row">
-                    
+                    <div class="col-5">
                         <%
                            
                             String Id=request.getParameter("Id");
                             RequestCtrl RQctrl = new RequestCtrl();
                             Request RQ = RQctrl.getRQbyID(Id);
-                            
+                                                        
                             
                             
                                                     %>
-                        <div class="form-floating mb-3 col-1">
-                            <label for="floatingInput">RQ </label><input id="IdRQ" type="text" class="form-control"  placeholder="ejemplo" name="IdRequerimiento_PK" readonly value="<%=RQ.getIdRequerimiento_PK()%>">
+                        <div class="form-floating mb-3">
+                            <label for="floatingInput">RQ </label><input id="IdRQ" type="text" class="form-control"  placeholder="ejemplo" name="IdRequerimiento_PK" readonly value="<%=RQ.getIdRequerimiento_PK() %>">
                            
                         </div>
-                        <div class="form-floating  col-2" >
-                            <label for="floatingInput">Id Usuario </label><input type="text" class="form-control"  placeholder="ejemplo" required="" readonly value="<%=RQ.getIdUser_FK()%>">
+                        <div class="form-floating mb-3">
+                            <label for="floatingInput">Id Usuario </label><input type="text" class="form-control"  placeholder="ejemplo" name="IdUser_FK" required="" readonly value="<%=RQ.getIdUser_FK() %>">
                            
                         </div>
-                        <div class="form-floating  col-2">
-                            <label for="floatingInput">Id Compañia </label><input type="text" class="form-control" id="floatingInput" placeholder="ejemplo"  required="" readonly value="<%=RQ.getIdCompany_FK()%>" >
+                        <div class="form-floating mb-3">
+                            <label for="floatingInput">Id Compañia </label><input type="text" class="form-control" id="floatingInput" placeholder="ejemplo" name="IdCompany_FK" required="" readonly value="<%=RQ.getIdCompany_FK()%>" >
                            
+                        </div><div class="form-floating mb-3">
+                             <label for="floatingInput">Rango de fechas para el servicio</label>
+                            <input type="text" name="datefilter" required="" value="<%=RQ.getFecha_inicio_req() +"/" + RQ.getFecha_fin_req() %>" />
                         </div>
-                        <div class="form-floating  col-2">
-                            <label for="floatingInput">Estado </label><input type="text" class="form-control" id="Estado" placeholder="ejemplo"  required="" readonly value="<%=RQ.getEstado()%>" >
-                           
-                        </div>
-                            <div class="form-floating  col-2">
-                            <label for="floatingInput">Fecha Solicitud </label><input type="text" class="form-control" id="FechaSol" placeholder="ejemplo"  required="" readonly value="<%=RQ.getFecha_Solicitud() %>" >
-                           
-                        </div>
-                        <div class="form-floating col-3">
-                             <label for="floatingInput">Rechas de servicio</label>
-                            <input type="text" class="form-control"   required="" readonly value="<%=RQ.getFecha_inicio_req() + " / " + RQ.getFecha_fin_req() %>" />
-                        </div>
-                        
-                                       
-                     
-                </div>
-                <div class="row">
-                    
-                       
-                        <div class="form-floating mb-3 col-2">
-                            <label for="floatingInput">Fecha Cotizacion </label><input id="IdRQ" type="text" class="form-control"  placeholder="ejemplo" name="IdRequerimiento_PK" readonly value="<%=RQ.getFecha_Cotizacion() %>">
-                           
-                        </div>
-                        <div class="form-floating  col-2" >
-                            <label for="floatingInput">F. Aprov. Cot </label><input type="text" class="form-control"  placeholder="ejemplo" required="" readonly value="<%=RQ.getFecha_Aprov_Cot() %>">
-                           
-                        </div>
-                        <div class="form-floating  col-2">
-                            <label for="floatingInput">F. Ejec. OT </label><input type="text" class="form-control" id="floatingInput" placeholder="ejemplo"  required="" readonly value="<%=RQ.getFecha_Ejec_Ord_Serv() %>" >
-                           
-                        </div>
-                        <div class="form-floating  col-2">
-                            <label for="floatingInput">F. Informe </label><input type="text" class="form-control" id="Estado" placeholder="ejemplo"  required="" readonly value="<%=RQ.getFecha_Informe() %>" >
-                           
-                        </div>
-                            <div class="form-floating  col-2">
-                            <label for="floatingInput">F. Encuest. Satisf </label><input type="text" class="form-control" id="FechaSol" placeholder="ejemplo"  required="" readonly value="<%=RQ.getFecha_Encuesta() %>" >
-                           
-                        </div>
-                        <div class="form-floating col-2">
-                             <label for="floatingInput">Id Enc. Satisfacción</label>
-                             <input type="text" class="form-control"   required="" readonly value="<%=RQ.getIdEncuestasSatisf() %>" />
-                        </div>
-                        
-                    <div class="col">
                         <div class="form-floating mb-3">
                             <label for="floatingInput">Descripcion RQ </label>
-                            <textarea type="text" class="form-control" id="floatingInput" placeholder="breve descripcion" readonly  required=""  value=""><%=RQ.getRQDescripcion() %></textarea>
+                            <textarea type="text" class="form-control" id="floatingInput" placeholder="breve descripcion" name="RQDescripcion" required=""  value="<%=RQ.getRQDescripcion() %>"></textarea>
                            
                         </div>
                     </div>
-                   
+                    <div class="col-7">
+                        <br>
+                        <div class="card p-4">
+                        <label>Sucursal/Campo : </label>
+                        <select id="SelSuc" class="form-select"  aria-label="multiple select example"  >
+                            <option value="1" >Seleccione una sucursal</option>
+                            <option value="1" >Campo la cira</option>
+                            <option value="2">Campo Casabe</option>
+                           
+                        </select>
+                        <label>Equipo: </label>
+                        <select id="ListEQ" class="form-select"  aria-label="multiple select example"  >
+                             <option value="1" >Selecciones un equipo</option>
+
+                        </select>
+                        <br>
+                        <label for="floatingInput">Que requiere el equipo?</label>
+                            <textarea id="TextRQ" type="text" class="form-control" id="floatingInput" rows="5" placeholder="especifique el monitoreo "  value=""></textarea>
+                          <center>
+                         <button id="AddEQ" class="btn btn-success btnSize" >Agregar Equipos</button>
+                         </center> 
+                        </div> <input type="hidden"  id ="RQJson" name="RQJson" value="" />      
+                    </div>
                      
                 </div>
                             <br>
@@ -154,15 +134,15 @@
                 <table id="RQDetails" class="table table-striped table-hover">            
                 <thead>
                   <tr>
-                    <th scope="col">Item</th>
                     <th scope="col">RQ</th>
                     <th scope="col">Id Sucursal</th>
                     <th scope="col">Id Equipo</th>
                     <th scope="col">Solicitud</th>
                     <th scope="col">Estado</th>
+                  <th scope="col">Eliminar</th>
                   </tr>
                 </thead>
-                    <tbody id="RQTable">
+                <tbody id="RQTable">
                     <% 
                        try{
                         ArrayList<RQDetails> listaDetallesRQ = new ArrayList<>(); 
@@ -171,25 +151,26 @@
                         for(int i=0; i<listaDetallesRQ.size();i++){
                     %>
                         <tr>
-                            <th scope="row"><%=listaDetallesRQ.get(i).getIdDeralleRQ_PK() %></th>
-                            <td><%=listaDetallesRQ.get(i).getIdRequerimiento_FK() %></td>
+                            <td scope="row">><%=listaDetallesRQ.get(i).getIdRequerimiento_FK() %></td>
                             <td><%=listaDetallesRQ.get(i).getIdSucursal_FK() %></td>
                             <td><%=listaDetallesRQ.get(i).getIdEquipo_FK() %></td>
                             <td><%=listaDetallesRQ.get(i).getDescripcion_RQ() %></td>
                             <td><%=listaDetallesRQ.get(i).getEstado()%></td>
+                            <td><i class='fa fa-trash' style='cursor:pointer;' >borrar</i></td>
                         </tr>
                     <%}
                     }catch(Exception e){
                       System.out.println("error index " + e);
                      }
                     %>
-                    </tbody>
+                </tbody>
+                
                 </table>
-                <center>
-                      <button id="createRQ" class="btn btn-success btnSize" href="RequestUpdate.jsp?id=<%=request.getParameter("Id")%>">Editar</button>
-                      <button id="cerrar" class="btn btn-danger btnSize"  href="main.jsp" >Cancelar</button>
-                </center>          
-            
+                  <center>
+                         <button id="createRQ" class="btn btn-success btnSize" name="btnAccion" value="CreateRQ">Actualizar</button>
+                      <button id="cerrar" class="btn btn-danger btnSize"   >Cancelar</button>
+                     </center>          
+            </form>
         </section>
         
 
@@ -205,7 +186,21 @@
             <script>
                 $(document).ready(function() {
                     document.getElementById("main").href="main.jsp?Id="+localStorage.getItem("IdUser_PK")
-                    
+                    $('input[name="datefilter"]').daterangepicker({
+                        autoUpdateInput: false,
+                        locale: {
+                            cancelLabel: 'Clear'
+                        }
+                    });
+
+                    $('input[name="datefilter"]').on('apply.daterangepicker', function(ev, picker) {
+                        $(this).val(picker.startDate.format('YYYY-MM-DD') + ' / ' + picker.endDate.format('YYYY-MM-DD'));
+                    });
+
+                    $('input[name="datefilter"]').on('cancel.daterangepicker', function(ev, picker) {
+                        $(this).val('');
+                    });
+
 
                     document.getElementById("avatar").src="/assets/img/"+localStorage.getItem("Avatar")+".png";
                     $('#RQTable').on('click','tr td', function(e){
@@ -227,12 +222,11 @@
                               });
                         $('#RQJson').val(JSON.stringify(table));
                     });
+                    
                     $('#cerrar').click((e)=>{
                         e.preventDefault() ;
                         window.location.href='main.jsp';
                     });
-                    
-
                     
                     $('#SelSuc').change(function() {
                         $('#ListEQ').empty();
