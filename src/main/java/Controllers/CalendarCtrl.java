@@ -71,7 +71,7 @@ Calendar objCalendar = new Calendar();
             return listCalendar; 
             
         } catch (Exception error) {
-            System.out.println("Error Controlador: " + error);
+            System.out.println("Error controlador al obtener todo el calendario: " + error);
         }
  
         return null;
@@ -100,7 +100,7 @@ Calendar objCalendar = new Calendar();
             return listCalendar; 
             
         } catch (Exception error) {
-            System.out.println("Error Controlador: " + error);
+            System.out.println("Error controlador al obetner calendario por usuario: " + error);
         }
  
         return null;

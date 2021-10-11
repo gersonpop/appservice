@@ -10,7 +10,7 @@
     
     <head>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" href="/assets/CSS/login.css">
+        <link rel="stylesheet" href="assets/CSS/login.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
@@ -49,7 +49,7 @@
 
               </div> <!-- end login -->
               <div class="logo">
-                    <img class="img_logo" src="/assets/img/Logo_w.png">
+                    <img class="img_logo" src="assets/img/Logo_w.png">
                   <div class="clearfix"></div>
               </div>
 

@@ -110,7 +110,7 @@ public class User {
     
      
      }
-     public void update(){
+     public boolean  update(){
      Connex objConnex = new Connex();
      objConnex.Connect();
         
@@ -119,27 +119,29 @@ public class User {
                     "UserEmail =?, " +
                     "Password =?, " +
                     "userName =?, " +
-                    "userLastName =? " +
+                    "userLastName =? ," +
                     "idCompany_FK =?, " +
-                    "avatar =?, " +
+                    "avatar =? " +
                     "WHERE IdUser_PK  =?;"   ;
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
             
             stmt.setString(1,this.UserEmail);
+            stmt.setString(2,this.Password);
             stmt.setString(3,this.userName);
             stmt.setString(4,this.userLastName);
             stmt.setString(5,this.idCompany_FK);
             stmt.setString(6,this.avatar);
-            stmt.setString(2,this.Password);
+            
             stmt.setString(7,this.IdUser_PK);
             stmt.execute();
             objConnex.Disconnect();
             System.out.println("Actualizando datos usuario");
-           
+            return true;
             
         }catch(Exception e){
          System.out.println("Error Controlador " + e);
+         return false;
         }
     }
      public void delete(){ 

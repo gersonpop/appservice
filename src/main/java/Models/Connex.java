@@ -14,10 +14,19 @@ import java.sql.DriverManager;
  */
 public class Connex {
     public Connection conn;
+    /*conexion para pruebas en servidor local // */ 
+    
     private String host="Localhost:3306";
     private String database="appServices";
     private String user="root";
-    private String password="";
+    private String password="";//*/
+    
+    /*conexion para despliegue en en servidor remoto // */ 
+    /*
+    private String host="Localhost:3306";
+    private String database="c3s46grupo8";
+    private String user="c3s46grupo8";
+    private String password="ZXTL8ing";//*/
     
     //metodos
     public void Connect (){

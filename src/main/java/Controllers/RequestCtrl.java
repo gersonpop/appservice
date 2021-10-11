@@ -58,7 +58,6 @@ public class RequestCtrl extends HttpServlet {
                 objRQ.setFecha_inicio_req(fecha.substring(0, 10));
                 objRQ.setFecha_fin_req(fecha.substring(13, 23));
                 
-                 System.out.println("El parametro de descripcion es: "+ request.getParameter("RQDescripcion"));
                 objRQ.setEstado("Solicitado");
                 
                 
@@ -72,6 +71,7 @@ public class RequestCtrl extends HttpServlet {
                     out.println(mensaje);
                 }else{
                     if(objRQ.UpdateCliente()){
+                        
                         userCal.setTitle(objRQ.getRQDescripcion());
                         userCal.setStart(objRQ.getFecha_inicio_req());
                         userCal.setEnd(objRQ.getFecha_fin_req());
@@ -83,15 +83,16 @@ public class RequestCtrl extends HttpServlet {
                         userCal.setUrl("Request.jsp?Id="+ objRQ.getIdRequerimiento_PK());
                         userCal.InsertDate();
                         
-                        
                         JsonArray array = new JsonParser().parse(RQJSon).getAsJsonArray();
                         for(int i = 0 ; i < array.size() ; i++){
                             RQDetails RQDtls = new RQDetails();
                             RQDtls.setIdRequerimiento_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("RQ").getAsString()));
-                            RQDtls.setIdSucursal_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("Id Sucursal").getAsString()));
-                            RQDtls.setIdEquipo_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("Id Equipo").getAsString()));
+                            System.out.println("vamos a insertar un item" + array.get(i));
+                           RQDtls.setIdSucursal_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("Id Sucursal").getAsString()));
+                             RQDtls.setIdEquipo_FK(Integer.parseInt(array.get(i).getAsJsonObject().get("Id Equipo").getAsString()));
                             RQDtls.setDescripcion_RQ(array.get(i).getAsJsonObject().get("Solicitud").getAsString());
                             RQDtls.setEstado(array.get(i).getAsJsonObject().get("Estado").getAsString());
+                            
                             RQDtls.InsertItem();
                         }
                         
@@ -115,7 +116,7 @@ public class RequestCtrl extends HttpServlet {
                 }
             }
         }catch(Exception e){
-            System.out.println("Error Controlador " + e);
+            System.out.println("Error Controlador al crear la rq " + e);
         }
         
     }
@@ -157,7 +158,7 @@ public class RequestCtrl extends HttpServlet {
             return listaRQDetails; 
             
         } catch (Exception error) {
-            System.out.println("Error Controlador: " + error);
+            System.out.println("Error Controlador obtener detalles rq: " + error);
         }
  
         return null;

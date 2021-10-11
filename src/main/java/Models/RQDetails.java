@@ -81,6 +81,7 @@ public class RQDetails {
         
         try{
             
+                        
             String sql ="INSERT INTO detalle_rq VALUES (null,?,?,?,?,?);";
             PreparedStatement stmt;
             stmt = objConnex.conn.prepareStatement(sql);
@@ -94,7 +95,7 @@ public class RQDetails {
             System.out.println("estoy insertando varios datos en rq details");
             return true;
         }catch(Exception e){
-         System.out.println("Error Controlador " + e);
+         System.out.println("Error inserta detalles de rq  " + e);
          return false;
         }
     }

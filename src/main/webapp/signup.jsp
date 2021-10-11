@@ -12,7 +12,7 @@
 <html>
     <head>
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-        <link rel="stylesheet" href="/assets/CSS/register.css">
+        <link rel="stylesheet" href="assets/CSS/register.css">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Login</title>
@@ -48,7 +48,7 @@
                         <select class="custom-select custom-select-lg mb-3" name="avatar">
                                                                                             <option selected>seleccione un icono</option>
                                                                                                 <option value="woman">mujer</option>
-                                                                                                <option value="men">hombre</option>
+                                                                                                <option value="man">hombre</option>
                                                                                                 <option value="cat">gato</option>
                                                                                                 <option value="dog">perro</option>
                                                                                                 <option value="car">carro</option>
@@ -72,7 +72,7 @@
 
               </div> <!-- end login -->
               <div class="logo">
-                    <img class="img_logo" src="/assets/img/Logo_w.png">
+                    <img class="img_logo" src="assets/img/Logo_w.png">
                   <div class="clearfix"></div>
               </div>
 

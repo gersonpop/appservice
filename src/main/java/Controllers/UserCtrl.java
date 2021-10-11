@@ -35,6 +35,7 @@ public class UserCtrl extends HttpServlet {
             throws ServletException, IOException {
         try (PrintWriter out = response.getWriter()) {
             String accion = request.getParameter("btnAccion");
+            
             if(accion.equals("signin")){
                 String IdUser_PK = request.getParameter("IdUser_PK");
                 String Password = request.getParameter("Password");
@@ -140,25 +141,114 @@ public class UserCtrl extends HttpServlet {
                                  "</script></body></html>";
                     out.println(mensaje);
                 }
-            }
-             else if(accion.equals("delete")){
+            }else if(accion.equals("changepsw")){
+                System.out.println("todo va bien");
                 String IdUser_PK = request.getParameter("IdUser_PK");
+                String Password = request.getParameter("oldpsw");
                 objUser.setIdUser_PK(IdUser_PK);
+                objUser.setPassword(Password);
+                if(objUser.authUser()){
+                    if(request.getParameter("newpsw").equals(request.getParameter("confirmpsw"))){
+                        User updateUser= objUser.getUserById();
+                        updateUser.setPassword(request.getParameter("newpsw"));
+                        updateUser.update();
+                        String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('contraseña actualizada correctamente'); "+
+                                 "window.location.href='main.jsp'; "+
+                                 "</script></body></html>";
+                        out.println(mensaje);
+                    }else{
+                        String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('la nuevas contraseñas no son iguales'); "+
+                                 "window.history.back(); "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                    }
+                }else{
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('contraseña actual incorrecta'); "+
+                                 "window.history.back(); "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }
                 
-                objUser.delete();
+            }else if(accion.equals("userUpdate")){
+                String IdUser_PK = request.getParameter("IdUser_PK");
+                String UserEmail = request.getParameter("UserEmail");
+                String userName= request.getParameter("UserName");
+                String userLastName= request.getParameter("UserLastName");
+                String idCompany_FK = request.getParameter("IdCompany_FK");
+                String avatar=request.getParameter("avatar");                
+                String password=request.getParameter("password");                
+                objUser.setIdUser_PK(IdUser_PK);
+                objUser.setUserEmail(UserEmail);
+                objUser.setUserName(userName);
+                objUser.setUserLastName(userLastName);
+                objUser.setIdCompany_FK(idCompany_FK);
+                objUser.setAvatar(avatar);
+                objUser.setPassword(password );
+                
+                if(objUser.update()){
+                    System.out.println("ya guardamos");
+                    String mensaje = "<html><body>"+
+                                    "<script type='text/javaScript'> "+
+                                    "localStorage.setItem('IdUser_PK','" + objUser.getIdUser_PK()+"');"+
+                                    "localStorage.setItem('UserName','" + objUser.getUserName()+"');"+
+                                    "localStorage.setItem('UserLastName','" + objUser.getUserLastName() +"');"+
+                                    "localStorage.setItem('UserEmail','" + objUser.getUserEmail() +"');"+
+                                    "localStorage.setItem('IdCompany_FK','" + objUser.getIdCompany_FK() +"');"+
+                                    "localStorage.setItem('Avatar','" + objUser.getAvatar() +"');"+
+                                
+                                    "window.location.href='main.jsp'; "+
+                                    "alert('usuario actualizado con éxito'); "+
+                                    "</script></body></html>";
+                    out.println(mensaje);
+                }
+                else
+                {
+                    String mensaje = "<html><body>"+
+                                 " <script type='text/javaScript'> "+
+                                 "alert('no se pudo actualizar usuario, inténtelo de nuevo'); "+
+                                 "window.history.back(); "+
+                                 "</script></body></html>";
+                    out.println(mensaje);
+                }
+            
+            
+            
+            }else if(accion.equals("update")){
+                String IdUser_PK = request.getParameter("IdUser_PK");
+                String UserEmail = request.getParameter("UserEmail");
+                String userName= request.getParameter("UserName");
+                String userLastName= request.getParameter("UserLastName");
+                String idCompany_FK = request.getParameter("IdCompany_FK");
+                String avatar=request.getParameter("avatar");
+                String password = IdUser_PK +"**";
+                
+                objUser.setIdUser_PK(IdUser_PK);
+                objUser.setUserEmail(UserEmail);
+                objUser.setUserName(userName);
+                objUser.setUserLastName(userLastName);
+                objUser.setIdCompany_FK(idCompany_FK);
+                objUser.setAvatar(avatar);
+                objUser.setPassword(password);
+                objUser.update();
+                
                 String mensaje = "<html><body>"+
                                  " <script type='text/javaScript'> "+
-                                 "alert('Producto Eliminado correctamente'); "+
-                                 "window.location.href='index2.jsp'; "+
+                                 "alert('Producto Actualizado correctamente'); "+
+                                 "window.location.href='index.jsp'; "+
                                  "</script></body></html>";
                         out.println(mensaje);
             }
-                                    
             }catch(Exception e){
-            System.out.println("Error Controlador " + e);
+            System.out.println("Error Controlador user" + e);
             }
         }
-    
+   
     public User show(String IdUser_PK){
         try {
             objUser.setIdUser_PK(IdUser_PK);
@@ -184,60 +274,6 @@ public class UserCtrl extends HttpServlet {
  
         return null;
     }
-   /* public ArrayList show(String IdUser_PK){
-        try {
-            objUser.setIdUser_PK(IdUser_PK);
-            ResultSet consulta = objUser.showUser(); 
-            ArrayList<User> listUser = new ArrayList<>(); 
-            
-            while(consulta.next()){
-                objUser = new User(); 
-                objUser.setIdUser_PK(consulta.getString(1));
-                objUser.setUserEmail(consulta.getString(2));
-                objUser.setUserName(consulta.getString(3));
-                objUser.setUserLastName(consulta.getString(4));
-                objUser.setIdCompany_FK(consulta.getString(5));
-                objUser.setAvatar(consulta.getString(6));
-                objUser.setPassword(consulta.getString(7));
-                listUser.add(objUser); 
-                
-            } 
-            
-        } catch (Exception error) {
-            System.out.println("Error Controlador: " + error);
-        }
- 
-        return null;
-    }
-   
-    public ArrayList list(){
-        try {
-            ResultSet consulta = objUser.listUser(); 
-            ArrayList<User> listUser = new ArrayList<>(); 
-            
-            while(consulta.next()){
-                objUser = new User(); 
-                objUser.setIdUser_PK(consulta.getString(1));
-                objUser.setUserEmail(consulta.getString(2));
-                objUser.setUserName(consulta.getString(3));
-                objUser.setUserLastName(consulta.getString(4));
-                objUser.setIdCompany_FK(consulta.getString(5));
-                objUser.setAvatar(consulta.getString(6));
-                objUser.setPassword(consulta.getString(7));
-                
-                listUser.add(objUser); 
-                
-            }
-            
-            return listUser; 
-            
-        } catch (Exception error) {
-            System.out.println("Error Controlador: " + error);
-        }
- 
-        return null;
-    }*/
-
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
